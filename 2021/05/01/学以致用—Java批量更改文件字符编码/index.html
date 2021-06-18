@@ -20,19 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Welcome to dcsuibian’s blog">
+  <meta name="description" content="批量编码转换">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2021/03/19/hello-world/index.html">
+<meta property="og:title" content="学以致用——Java批量更改文件字符编码">
+<meta property="og:url" content="http://example.com/2021/05/01/%E5%AD%A6%E4%BB%A5%E8%87%B4%E7%94%A8%E2%80%94Java%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to dcsuibian’s blog">
+<meta property="og:description" content="批量编码转换">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-03-19T07:05:43.000Z">
-<meta property="article:modified_time" content="2021-03-20T15:09:44.609Z">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195301.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195304.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195306.png">
+<meta property="article:published_time" content="2021-05-01T11:45:32.000Z">
+<meta property="article:modified_time" content="2021-05-08T15:19:07.637Z">
 <meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195301.png">
 
-<link rel="canonical" href="http://example.com/2021/03/19/hello-world/">
+<link rel="canonical" href="http://example.com/2021/05/01/%E5%AD%A6%E4%BB%A5%E8%87%B4%E7%94%A8%E2%80%94Java%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/">
 
 
 <script id="page-configurations">
@@ -45,7 +50,7 @@
   };
 </script>
 
-  <title>Hello World | Hexo</title>
+  <title>学以致用——Java批量更改文件字符编码 | Hexo</title>
   
 
 
@@ -165,7 +170,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/19/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/01/%E5%AD%A6%E4%BB%A5%E8%87%B4%E7%94%A8%E2%80%94Java%E6%89%B9%E9%87%8F%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -178,7 +183,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          学以致用——Java批量更改文件字符编码
         </h1>
 
         <div class="post-meta">
@@ -188,17 +193,18 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-03-19 15:05:43" itemprop="dateCreated datePublished" datetime="2021-03-19T15:05:43+08:00">2021-03-19</time>
+              <time title="Created: 2021-05-01 19:45:32" itemprop="dateCreated datePublished" datetime="2021-05-01T19:45:32+08:00">2021-05-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-03-20 23:09:44" itemprop="dateModified" datetime="2021-03-20T23:09:44+08:00">2021-03-20</time>
+                <time title="Modified: 2021-05-08 23:19:07" itemprop="dateModified" datetime="2021-05-08T23:19:07+08:00">2021-05-08</time>
               </span>
 
           
+            <div class="post-description">批量编码转换</div>
 
         </div>
       </header>
@@ -209,7 +215,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Welcome to dcsuibian’s blog</p>
+        <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>参考：疯狂Java讲义（第五版）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.Charset;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Files;</span><br><span class="line"><span class="keyword">import</span> java.nio.file.Path;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="comment">// 我的文件夹位置</span></span><br><span class="line">        String codes = <span class="string">&quot;C:/Users/dcsuibian/study/疯狂Java讲义/codes&quot;</span>;</span><br><span class="line">        Files.walk(Path.of(codes))</span><br><span class="line">                <span class="comment">// 过滤掉所有非 .java 文件</span></span><br><span class="line">                .filter(path -&gt; path.toString().endsWith(<span class="string">&quot;.java&quot;</span>))</span><br><span class="line">                .forEach(path -&gt; &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        String s = Files.readString(path, Charset.forName(<span class="string">&quot;GBK&quot;</span>));</span><br><span class="line">                        Files.writeString(path, s, Charset.forName(<span class="string">&quot;UTF-8&quot;</span>));</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                        System.out.println(<span class="string">&quot;出错的文件：&quot;</span> + path);</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p>运行前：</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195301.png" alt="image-20210501195024201"></p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195304.png" alt="image-20210501195059993"></p>
+<p>运行后：</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/20210501195306.png" alt="image-20210501195133387"></p>
+<p>成功！！！</p>
 
     </div>
 
@@ -218,16 +232,22 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+          </div>
 
         
 
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2021/03/19/Python%E9%85%8D%E5%90%88multipart-x-mixed-replace%E5%AE%9E%E7%8E%B0%E5%AE%9E%E6%97%B6%E8%A7%86%E9%A2%91%E4%BC%A0%E8%BE%93/" rel="next" title="Python配合multipart/x-mixed-replace实现实时视频传输">
-      Python配合multipart/x-mixed-replace实现实时视频传输 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/04/22/Uncaught-TypeError-this-xhr-upload-addEventListener-is-not-a-function-%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" rel="prev" title="'Uncaught TypeError: this.xhr.upload.addEventListener is not a function'解决方案">
+      <i class="fa fa-chevron-left"></i> 'Uncaught TypeError: this.xhr.upload.addEventListener is not a function'解决方案
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/05/07/%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/" rel="next" title="解决"The goal you specified requires a project to execute but there is no POM in this directory"问题">
+      解决"The goal you specified requires a project to execute but there is no POM in this directory"问题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -287,6 +307,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%88%E6%9E%9C"><span class="nav-number">2.</span> <span class="nav-text">效果</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

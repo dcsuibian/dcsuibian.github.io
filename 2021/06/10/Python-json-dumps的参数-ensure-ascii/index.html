@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="JSON中表示非ASCII字符的两种方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Python] json.dumps的参数:ensure_ascii">
+<meta property="og:url" content="http://example.com/2021/06/10/Python-json-dumps%E7%9A%84%E5%8F%82%E6%95%B0-ensure-ascii/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JSON中表示非ASCII字符的两种方式">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610232332871.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611001152714.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610234421052.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610235652946.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003300773.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003331814.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003417118.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003443012.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003942010.png">
+<meta property="og:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611010050638.png">
+<meta property="article:published_time" content="2021-06-10T15:19:37.000Z">
+<meta property="article:modified_time" content="2021-06-18T16:23:44.935Z">
+<meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="Python JSON 字符编码">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610232332871.png">
+
+<link rel="canonical" href="http://example.com/2021/06/10/Python-json-dumps%E7%9A%84%E5%8F%82%E6%95%B0-ensure-ascii/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>[Python] json.dumps的参数:ensure_ascii | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/10/Python-json-dumps%E7%9A%84%E5%8F%82%E6%95%B0-ensure-ascii/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          [Python] json.dumps的参数:ensure_ascii
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-10 23:19:37" itemprop="dateCreated datePublished" datetime="2021-06-10T23:19:37+08:00">2021-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-19 00:23:44" itemprop="dateModified" datetime="2021-06-19T00:23:44+08:00">2021-06-19</time>
+              </span>
+
+          
+            <div class="post-description">JSON中表示非ASCII字符的两种方式</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h1><p>这部分无关Python，只是让我想起了Python的<code>json.dumps()</code>而已。</p>
+<p>今天，我在看<a target="_blank" rel="noopener" href="https://jsonlines.org/">JSON Lines</a>介绍的时候看到了这么一句话：</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610232332871.png" alt="image-20210610232332871"></p>
+<blockquote>
+<p>JSON allows encoding Unicode strings with only ASCII escape sequences, however those escapes will be hard to read when viewed in a text editor.</p>
+</blockquote>
+<p>当我读到这句话的时候，我能看懂”ASCII escape sequences“是”ASCII转译序列“的意思，但我不明白的是：JSON不是要求用UTF-8的么，为什么还要转译呢？</p>
+<p>当时的我，还不知道JSON中表示非ASCII字符的两种方式。（不太确定这个说法对不对）</p>
+<h1 id="两种不同的表示方式"><a href="#两种不同的表示方式" class="headerlink" title="两种不同的表示方式"></a>两种不同的表示方式</h1><p>如果你用过几次<code>json.dumps()</code>，你一定知道这个函数有一个<code>ensure_ascii</code>参数，而当它改变时，输出的结果也就有不同：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/86d66257de41">json 中的ensure_ascii=False</a> （貌似用的是python 2，但不重要）</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611001152714.png" alt="image-20210611001152714"></p>
+<p>可以看到，<code>ensure_ascii</code>影响了序列化后的最终形态。</p>
+<p>尽管样子不同，但是你会发现，使用<code>json.loads()</code>读取时却并不需要特殊处理，效果是一样的。</p>
+<h2 id="读取实验"><a href="#读取实验" class="headerlink" title="读取实验"></a>读取实验</h2><p>与上面的对应，右边的<code>\u4e2d\u56fd</code>就是<code>中国</code>两个字在Unicode中的表示。</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610234421052.png" alt="image-20210610234421052"></p>
+<p>用Python测试下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding=UTF-8</span></span><br><span class="line"><span class="comment"># 文件：run.py</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;case1.json&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    case1=json.load(f)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;case2.json&#x27;</span>,<span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    case2=json.load(f)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;case1读取：&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(case1[<span class="string">&#x27;country&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;case2读取：&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(case2[<span class="string">&#x27;country&#x27;</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210610235652946.png" alt="image-20210610235652946"></p>
+<p>可以看到，输出的时候都输出了”中国“两个字，可见写中国和<code>\u4e2d\u56fd</code>的效果是一样的，并且读取的时候不需要增加任何参数，自动完成。</p>
+<p>实际上，这并没有什么奇怪的。不少语言的源代码文件都支持在字符串里以<code>\u4e2d\u56fd</code>或<code>中国</code>同样的方式表示非ASCII字符。</p>
+<p>只要让此文本的处理器把字符串里的单个反斜杠<code>\</code>视为转译字符就可以。</p>
+<p>真正重要的是为什么？</p>
+<h2 id="为什么？"><a href="#为什么？" class="headerlink" title="为什么？"></a>为什么？</h2><p>（以下只是我的一些猜测）</p>
+<p>如前所述，JSON是要求使用UTF-8的，所以我不明白为什么要使用ASCII转码的方式来表示同样的内容。</p>
+<p>但这个问题其实并不在于JSON，而是在于文本文件本身，还是字符编码的问题。</p>
+<p>举个例子，如果我现在拿到了一个<code>.json</code>文件，但是我使用一个非常老的编辑器，或者我使用的编辑器使用不同的编码打开它会怎样？</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003300773.png" alt="image-20210611003300773"><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003331814.png" alt="image-20210611003331814"><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003417118.png" alt="image-20210611003417118"><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003443012.png" alt="image-20210611003443012"></p>
+<p>可以看到，当使用了错误的字符编码打开文件时，使用<code>中国</code>这种方式编写的文件出现了乱码问题，而使用<code>\u4e2d\u56fd</code>这种方式编写的文件则完全没有问题。</p>
+<blockquote>
+<p>实际上这跟字符编码的历史有关。我相信是个程序员都知道ASCII码，相当于字符编码的”老祖宗“了。因此，大部分编码都是跟ASCII兼容的。你可以试试看，当你只用ASCII字符集里的字编写文本，当你切换编码时，你会发现丝毫没有影响：</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611003942010.png" alt="image-20210611003942010"></p>
+</blockquote>
+<p>但是，那些非ASCII的字符就没那么好运了，尽管现在大家都在提倡用UTF-8，但免不了还是有用其它字符集的文件。</p>
+<p>因此，如果你使用一开始使用的是转译的方式，那么打开文件时就不会出现乱码，而用户本身看到<code>\u4e2d\u56fd</code>大概也能猜到这是需要转译的。</p>
+<p>这只是个例子。现实中可能有更复杂的情况，比如当数据流经一个管道时，管道只能处理ASCII符，否则就会报错，这种情况下转译也比较适用。</p>
+<h2 id="选哪种？"><a href="#选哪种？" class="headerlink" title="选哪种？"></a>选哪种？</h2><p>既然你已经知道了区别，那么就是选哪种的问题了。</p>
+<ul>
+<li><p>使用转译的方式（<code>ensure_ascii=True</code>）兼容性更好，不容易出现乱码，但问题就是”however those escapes will be hard to read when viewed in a text editor“说的那样，当使用文本编辑器打开时，不容易看懂。</p>
+</li>
+<li><p>使用非转译的方式（<code>ensure_ascii=False</code>）更直观，当你想要打开它看看内容时，就比较易于理解。</p>
+</li>
+</ul>
+<p>实际上，如果你要接触只能处理ASCII字符的系统，那就没得选，只能采取转译方式。</p>
+<p>而我个人更偏向非转译的方式，因为目前我用到的软件系统对UTF-8的支持都还是挺不错的，如果有软件不支持，那我更倾向于换一个软件。</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p>如果你用过IDEA，你会知道文件编码中有一个设置：</p>
+<p><img src="https://dcsuibian-public-resources.oss-cn-hangzhou.aliyuncs.com/img/image-20210611010050638.png" alt="image-20210611010050638"></p>
+<p>如果有兴趣的话，可以自己建一个<code>.properties</code>文件，在开和关的情况下写一些非ASCII字符，用文本编辑器打开看看。</p>
+<p>建议：这个选项跟你的同事的保持一致，如果你没有同事，那建议不启用。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python-JSON-%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/" rel="tag"># Python JSON 字符编码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/23/Eureka%E4%B8%8Ehost-docker-internal/" rel="prev" title="Eureka与host.docker.internal">
+      <i class="fa fa-chevron-left"></i> Eureka与host.docker.internal
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/19/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0/%E5%AF%86%E7%A0%81%E5%AD%A6%E7%AC%94%E8%AE%B0-%E4%B8%8A-%E2%80%94%E2%80%94%E5%8A%A0%E5%AF%86%E9%80%9A%E8%AE%AF/" rel="next" title="密码学笔记(上)——加密通讯">
+      密码学笔记(上)——加密通讯 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B5%B7%E6%BA%90"><span class="nav-number">1.</span> <span class="nav-text">起源</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%A4%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">两种不同的表示方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.1.</span> <span class="nav-text">读取实验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.2.</span> <span class="nav-text">为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%89%E5%93%AA%E7%A7%8D%EF%BC%9F"><span class="nav-number">2.3.</span> <span class="nav-text">选哪种？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">思考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
