@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://wexcdn.com/img/image-20230507175923236.png">
 <meta property="og:image" content="https://wexcdn.com/img/image-20230507180039895.png">
 <meta property="article:published_time" content="2023-05-07T10:13:14.000Z">
-<meta property="article:modified_time" content="2023-11-20T12:45:19.664Z">
+<meta property="article:modified_time" content="2023-11-20T14:39:38.281Z">
 <meta property="article:author" content="dcsuibian">
 <meta property="article:tag" content="SSH">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-20 20:45:19" itemprop="dateModified" datetime="2023-11-20T20:45:19+08:00">2023-11-20</time>
+      <time title="修改时间：2023-11-20 22:39:38" itemprop="dateModified" datetime="2023-11-20T22:39:38+08:00">2023-11-20</time>
     </span>
 
   
@@ -258,7 +258,7 @@
 <p>Windows服务器的则是在<code>%PROGRAMDATA%\ssh</code>，另外需要管理员权限才能访问：</p>
 <p><img src="https://wexcdn.com/img/image-20230507180039895.png" alt="image-20230507180039895"></p>
 <h2 id="SSH代理转发"><a href="#SSH代理转发" class="headerlink" title="SSH代理转发"></a>SSH代理转发</h2><p>建议在<code>~/.bashrc</code>里添加如下内容：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">funtion proxyon()&#123;</span><br><span class="line">    export http_proxy=&#x27;http://127.0.0.1:7890&#x27;</span><br><span class="line">    export https_proxy=&#x27;http://127.0.0.1:7890&#x27;</span><br><span class="line">    export all_proxy=&#x27;socks5://127.0.0.1:7890&#x27;</span><br><span class="line">    echo -e &quot;Proxy on&quot;</span><br><span class="line">&#125;</span><br><span class="line">function proxyoff()&#123;</span><br><span class="line">    unset http_proxy https_proxy all_proxy</span><br><span class="line">    echo -e &quot;Proxy off&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function proxyon()&#123;</span><br><span class="line">    export http_proxy=&#x27;http://127.0.0.1:7890&#x27;</span><br><span class="line">    export https_proxy=&#x27;http://127.0.0.1:7890&#x27;</span><br><span class="line">    export all_proxy=&#x27;socks5://127.0.0.1:7890&#x27;</span><br><span class="line">    echo -e &quot;Proxy on&quot;</span><br><span class="line">&#125;</span><br><span class="line">function proxyoff()&#123;</span><br><span class="line">    unset http_proxy https_proxy all_proxy</span><br><span class="line">    echo -e &quot;Proxy off&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     </div>
