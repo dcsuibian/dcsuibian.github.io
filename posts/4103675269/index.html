@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://wexcdn.com/img/image-20230507175923236.png">
 <meta property="og:image" content="https://wexcdn.com/img/image-20230507180039895.png">
 <meta property="article:published_time" content="2023-05-07T10:13:14.000Z">
-<meta property="article:modified_time" content="2023-11-20T14:39:38.281Z">
+<meta property="article:modified_time" content="2024-01-24T18:24:29.126Z">
 <meta property="article:author" content="dcsuibian">
 <meta property="article:tag" content="SSH">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-20 22:39:38" itemprop="dateModified" datetime="2023-11-20T22:39:38+08:00">2023-11-20</time>
+      <time title="修改时间：2024-01-25 02:24:29" itemprop="dateModified" datetime="2024-01-25T02:24:29+08:00">2024-01-25</time>
     </span>
 
   
@@ -226,8 +226,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i &quot;$HOME/.ssh/id_rsa.pub&quot; user@host</span><br></pre></td></tr></table></figure>
 
 <p>不过这个不适合Windows（无论是客户端还是服务器），Windows还是手动将客户端<code>id_rsa.pub</code>的内容追加到<code>authorized_keys</code>里。</p>
-<p>如果你是在Linux服务器上手动新建的<code>.ssh</code>文件夹和<code>authorized_keys</code>文件，那么请记得在服务端运行以下命令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 700 ~/.ssh &amp;&amp; chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>如果是在Linux服务器上手动新建<code>.ssh</code>文件夹和<code>authorized_keys</code>文件，那么请运行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/.ssh &amp;&amp; touch ~/.ssh/authorized_keys &amp;&amp; chmod 700 ~/.ssh &amp;&amp; chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
 
 <p>有些时候（比如在CentOS上），权限如果过于宽松，反而会造成密钥登录失败。</p>
 <p>3、SSH本机代理转发：</p>
@@ -303,7 +303,7 @@
 
   <div class="copyright">
     &copy; 
-    <span itemprop="copyrightYear">2023</span>
+    <span itemprop="copyrightYear">2024</span>
     <span class="with-love">
       <i class="fa fa-heart"></i>
     </span>
