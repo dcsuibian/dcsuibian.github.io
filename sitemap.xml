@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/index.html</loc>
+    <loc>http://example.com/google18cd9f8a5e8195de.html</loc>
     
     <lastmod>2024-04-29</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/google18cd9f8a5e8195de.html</loc>
+    <loc>http://example.com/tags/index.html</loc>
     
     <lastmod>2024-04-29</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/categories/index.html</loc>
+    <loc>http://example.com/about/index.html</loc>
     
     <lastmod>2024-04-29</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/about/index.html</loc>
+    <loc>http://example.com/categories/index.html</loc>
     
     <lastmod>2024-04-29</lastmod>
     
@@ -92,15 +92,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/784431303/</loc>
-    
-    <lastmod>2024-04-29</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/posts/876751979/</loc>
     
     <lastmod>2024-04-29</lastmod>
@@ -110,7 +101,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/1158072922/</loc>
+    <loc>http://example.com/posts/784431303/</loc>
     
     <lastmod>2024-04-29</lastmod>
     
@@ -120,6 +111,15 @@
   
   <url>
     <loc>http://example.com/posts/1125112739/</loc>
+    
+    <lastmod>2024-04-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/posts/1158072922/</loc>
     
     <lastmod>2024-04-29</lastmod>
     
@@ -201,6 +201,13 @@
   </url>
   
   <url>
+    <loc>http://example.com/tags/Python/</loc>
+    <lastmod>2024-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/tags/SSH/</loc>
     <lastmod>2024-04-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -209,13 +216,6 @@
   
   <url>
     <loc>http://example.com/tags/JavaScript/</loc>
-    <lastmod>2024-04-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/tags/Python/</loc>
     <lastmod>2024-04-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
