@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="用python程序来解析multipart&#x2F;x-mixed-replace内容">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python配合multipart&#x2F;x-mixed-replace实现实时视频传输">
+<meta property="og:url" content="http://example.com/posts/583835402/index.html">
+<meta property="og:site_name" content="dcsuibian的blog">
+<meta property="og:description" content="用python程序来解析multipart&#x2F;x-mixed-replace内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wexcdn.com/img/20210320124309.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210320124310.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210320141100.png">
+<meta property="article:published_time" content="2021-03-19T07:23:54.000Z">
+<meta property="article:modified_time" content="2024-10-24T18:07:32.945Z">
+<meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wexcdn.com/img/20210320124309.png">
+
+
+<link rel="canonical" href="http://example.com/posts/583835402/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/583835402/","path":"posts/583835402/","title":"Python配合multipart/x-mixed-replace实现实时视频传输"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python配合multipart/x-mixed-replace实现实时视频传输 | dcsuibian的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dcsuibian的blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%80%E8%A6%81%E5%88%86%E6%9E%90"><span class="nav-text">简要分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP%E5%86%85%E5%AE%B9%E8%A7%A3%E6%9E%90"><span class="nav-text">HTTP内容解析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E8%BF%9B%E4%B8%80%E6%AD%A5"><span class="nav-text">更进一步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/583835402/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dcsuibian的blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python配合multipart/x-mixed-replace实现实时视频传输 | dcsuibian的blog">
+      <meta itemprop="description" content="用python程序来解析multipart/x-mixed-replace内容">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python配合multipart/x-mixed-replace实现实时视频传输
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-19 15:23:54" itemprop="dateCreated datePublished" datetime="2021-03-19T15:23:54+08:00">2021-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-25 02:07:32" itemprop="dateModified" datetime="2024-10-25T02:07:32+08:00">2024-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">用python程序来解析multipart/x-mixed-replace内容</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000018563132">使用 multipart&#x2F;x-mixed-replace 实现 http 实时视频流</a>，关于<code>multipart/x-mixed-replace</code>的介绍，实现用的是JavaScript。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.miguelgrinberg.com/post/video-streaming-with-flask">Video Streaming with Flask</a>，Python使用Flask来进行推流的相关介绍。</li>
+</ul>
+<h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><p>这部分可以直接看<a target="_blank" rel="noopener" href="https://blog.miguelgrinberg.com/post/video-streaming-with-flask">Video Streaming with Flask</a>的内容，我只是进行了一定魔改。</p>
+<p>安装flask与opencv-python</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv-python flask</span><br></pre></td></tr></table></figure>
+
+<p>建立如下目录结构：</p>
+<p><img src="https://wexcdn.com/img/20210320124309.png" alt="image-20210320123717627"></p>
+<p><code>app.py</code>内容：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, render_template, Response</span><br><span class="line"></span><br><span class="line">app = Flask(__name__,</span><br><span class="line">            static_url_path=<span class="string">&#x27;/&#x27;</span>)  <span class="comment"># 设置静态文件路径（我不准备用模板，所以HTML也是放在static文件夹中）</span></span><br><span class="line">camera = cv2.VideoCapture(<span class="number">0</span>)  <span class="comment"># 初始化摄像头</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">index</span>():</span><br><span class="line">    <span class="keyword">return</span> app.send_static_file(<span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gen</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        ret, frame = camera.read()  <span class="comment"># 摄像头读取一帧</span></span><br><span class="line">        frame = cv2.imencode(<span class="string">&#x27;.jpg&#x27;</span>, frame)[</span><br><span class="line">            <span class="number">1</span>].tobytes()  <span class="comment"># opencv存储的图片数据不能用，所以需要进行转码</span></span><br><span class="line">        <span class="keyword">yield</span> (<span class="string">b&#x27;--frame\r\n&#x27;</span></span><br><span class="line">               <span class="string">b&#x27;Content-Type: image/jpeg\r\n\r\n&#x27;</span> + frame + <span class="string">b&#x27;\r\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/video_feed&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">video_feed</span>():</span><br><span class="line">    <span class="keyword">return</span> Response(gen(),</span><br><span class="line">                    mimetype=<span class="string">&#x27;multipart/x-mixed-replace; boundary=frame&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run(host=<span class="string">&#x27;0.0.0.0&#x27;</span>, debug=<span class="literal">True</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>index.html内容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Video Streaming Demonstration<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Video Streaming Demonstration<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/video_feed&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>启动应用程序，打开网页就能看到视频传输成功：</p>
+<p><img src="https://wexcdn.com/img/20210320124310.png" alt="image-20210320124124702"></p>
+<p>我的更改主要是使用了静态HTML文件，以摄像头读取的内容作为视频源，其它没什么。</p>
+<p>能看到视频就说明成功了。</p>
+<h1 id="简要分析"><a href="#简要分析" class="headerlink" title="简要分析"></a>简要分析</h1><p>目前来说，我们已经实现了一个简简单单的视频传输流程。但如果只是这样，只要看参考链接就好。</p>
+<p>接下来我们要实现不使用浏览器来解析请求。</p>
+<br/>
+
+<p>不过在此之前，让我们分析下这个东西的原理。</p>
+<p>让我们看看Flask的日志：</p>
+<p><img src="https://wexcdn.com/img/20210320141100.png" alt="image-20210320124821978"></p>
+<p>再看看MIME类型中的<code>multipart</code>。我们可以知道，整个视频传输流程都只是在一次HTTP请求中完成的。再看看MIME类型中的<code>replace</code>，我们大概可以推断出整个视频传输过程的原理。</p>
+<p>与普通的HTTP请求类似，浏览器向<code>/video_feed</code>发出请求，浏览器返回内容。</p>
+<p>不过特殊的地方是浏览器的响应报文，响应报文应该仍然是一个响应头（其中指明了<code>multipart/x-mixed-replace</code>的返回链接），但由<code>multipart</code>我们可以知道，响应报文的body部分是由多部分组成的，只要连接不断开，服务器就会往body里面不断增添新的内容。</p>
+<p>而浏览器接收到这么多内容是怎么做的呢？注意看<code>x-mixed-replace</code>中的<code>replace</code>，其实它是把最新拿到的一部分数据替换掉以前的数据，在我们的例子里就是用新的一帧图像替换掉前一帧图像。</p>
+<p>也就是说，<code>multipart/x-mixed-replace</code>只是告诉浏览器响应body中会不断追加数据，且请浏览器用新的一部分数据替换原来的。而浏览器又通过另一部分<code>Content-Type: image/jpeg</code>标记来知道每一部分的内容是图像的。</p>
+<br/>
+
+<p>总结：也就是说服务端得到的视频会被转换成一张张jpeg图片，传给浏览器。浏览器不断用新的图片替换以前的图片，就实现了视频的效果。这也就是为什么没法传输音频的原因了。</p>
+<h1 id="HTTP内容解析"><a href="#HTTP内容解析" class="headerlink" title="HTTP内容解析"></a>HTTP内容解析</h1><p>理解了以上内容，那就可以进行下一步的操作了。</p>
+<p>目前来说，浏览器自动帮我们解析了HTTP请求，我们做的只是将<code>&lt;img&gt;</code>标签的链接指向它。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/video_feed&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>但我现在有一个需求，如果我想在其它应用程序中使用这种视频流方式该怎么办呢？</p>
+<p>很明显，我们也必须实现对这种MIME类型的解析。</p>
+<p>不过以我目前搜到的资料来看，好像没有什么现成的库实现了这个功能。</p>
+<p>所以我就自己写了一个，不过需要先安装<code>requests</code>库。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://127.0.0.1:5000/video_feed&#x27;</span></span><br><span class="line">res = requests.get(url, stream=<span class="literal">True</span>)  <span class="comment"># steam=True不能少</span></span><br><span class="line"><span class="built_in">bytes</span> = <span class="string">b&#x27;\r\n&#x27;</span>  <span class="comment"># 目前收到的二进制内容</span></span><br><span class="line">cst = <span class="string">b&#x27;\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n&#x27;</span></span><br><span class="line">now = <span class="number">0</span></span><br><span class="line"><span class="built_in">next</span> = -<span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> chunk <span class="keyword">in</span> res.iter_content(chunk_size=<span class="number">1024</span>):</span><br><span class="line">    <span class="built_in">bytes</span> += chunk</span><br><span class="line">    <span class="built_in">next</span> = <span class="built_in">bytes</span>.find(cst, now + <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">if</span> -<span class="number">1</span> != <span class="built_in">next</span>:  <span class="comment"># 说明有新的一帧到了</span></span><br><span class="line">        bin_data = <span class="built_in">bytes</span>[now + <span class="built_in">len</span>(cst):<span class="built_in">next</span>]</span><br><span class="line">        image = cv2.imdecode(np.frombuffer(bin_data, np.uint8),</span><br><span class="line">                             cv2.IMREAD_UNCHANGED)</span><br><span class="line">        cv2.imshow(<span class="string">&#x27;frame&#x27;</span>, image)  <span class="comment"># 只是为了显示</span></span><br><span class="line">        cv2.waitKey(<span class="number">1</span>)</span><br><span class="line">        <span class="built_in">bytes</span> = <span class="built_in">bytes</span>[<span class="built_in">next</span>:]</span><br><span class="line">        now = <span class="number">0</span></span><br><span class="line">        <span class="built_in">next</span> = -<span class="number">1</span></span><br><span class="line">res.close()</span><br></pre></td></tr></table></figure>
+
+<p>写的很随意，我们知道请求体里面的内容大概会是<code>--frame\r\nContent-Type: image/jpeg\r\n\r\n二进制图片内容\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n二进制图片内容\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n二进制图片内容\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n二进制图片内容</code>······</p>
+<p>可以看到，每一部分的分隔符可以是<code>\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n</code>，所以我们可以通过检测这个来分析哪里是下一帧。（最开始的<code>--frame\r\nContent-Type: image/jpeg\r\n\r\n</code>前没有<code>\r\n</code>，但我们为了方便起见，就在<code>bytes</code>里初始化了一个<code>\r\n</code>）</p>
+<br/>
+
+<p><code>bin_data</code>的内容就是图片的二进制内容了，<code>numpy</code>和<code>cv2</code>只是为了将它显示出来，如果你不需要，可以删掉。</p>
+<br/>
+
+<p>优点：这种解析方法大概在其它语言里也能用。</p>
+<p>缺陷：这个程序是看到下一个<code>\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n</code>才知道前一帧的结束位置。所以最后一帧恐怕就没有处理。而且虽然这样写我测试成功了，但我仍然觉得这样写不太好（因为我对HTTP不是很了解，所以可能会有不知道的坑点存在）。</p>
+<h1 id="更进一步"><a href="#更进一步" class="headerlink" title="更进一步"></a>更进一步</h1><p>目前来说，已经能实现视频的传输了，不过还有两个问题：</p>
+<ul>
+<li>代码难以编写，其它代码很难和这部分结合</li>
+<li>存在一个目前还没有提到的累计问题</li>
+</ul>
+<br/>
+
+<p>先说第二个问题，如果你把客户端代码中的<code>cv2.waitKey(1)</code>改成<code>cv2.waitKey(1000)</code>，就会看到这个问题，视频基本上是以一种极慢速的方式播放的。</p>
+<p>这是因为服务端的代码根本就没有考虑客户端的接收速率，它只是单纯地从摄像头采集一帧，然后塞到响应body里。它的发送速率主要是取决于读取一帧所需要的时间和网络传输所需要的时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">gen</span>():</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        ret, frame = camera.read()  <span class="comment"># 摄像头读取一帧</span></span><br><span class="line">        frame = cv2.imencode(<span class="string">&#x27;.jpg&#x27;</span>, frame)[</span><br><span class="line">            <span class="number">1</span>].tobytes()  <span class="comment"># opencv存储的图片数据不能用，所以需要进行转码</span></span><br><span class="line">        <span class="keyword">yield</span> (<span class="string">b&#x27;--frame\r\n&#x27;</span></span><br><span class="line">               <span class="string">b&#x27;Content-Type: image/jpeg\r\n\r\n&#x27;</span> + frame + <span class="string">b&#x27;\r\n&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>所以，最重要的就是你的应用程序必须能够及时处理，否则你得到的画面可能就不是实时的了。针对这一点，我目前采用了多线程的解决方案：</p>
+<p>http_camera.py：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> device.camera <span class="keyword">import</span> Camera</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">HttpCamera</span>(<span class="title class_ inherited__">Camera</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, url</span>):</span><br><span class="line">        self.__url = url</span><br><span class="line">        self.__frame = <span class="literal">None</span></span><br><span class="line">        self.__last_frame = <span class="literal">None</span></span><br><span class="line">        self.__running_flag = <span class="literal">False</span>  <span class="comment"># 代表还在不在运行。</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isOpened</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> self.__running_flag</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">open</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> self.isOpened():  <span class="comment"># 如果已经open过了，第二次open就直接忽略。</span></span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        response = requests.get(self.__url,</span><br><span class="line">                                stream=<span class="literal">True</span>)  <span class="comment"># 向目标url请求</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">tmp</span>():</span><br><span class="line">            <span class="built_in">bytes</span> = <span class="string">b&#x27;\r\n&#x27;</span></span><br><span class="line">            cst = <span class="string">b&#x27;\r\n--frame\r\nContent-Type: image/jpeg\r\n\r\n&#x27;</span></span><br><span class="line">            now_position = <span class="number">0</span>  <span class="comment"># 这一帧的开始位置</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="keyword">for</span> chunk <span class="keyword">in</span> response.iter_content(chunk_size=<span class="number">1024</span>):</span><br><span class="line">                    <span class="keyword">if</span> <span class="keyword">not</span> self.__running_flag:  <span class="comment"># 如果在连接过程中用户close了，那就不用再执行了。</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="built_in">bytes</span> += chunk</span><br><span class="line">                    next_position = <span class="built_in">bytes</span>.find(cst, now_position + <span class="number">1</span>)</span><br><span class="line">                    <span class="keyword">if</span> -<span class="number">1</span> != next_position:</span><br><span class="line">                        bin_data = <span class="built_in">bytes</span>[now_position + <span class="built_in">len</span>(</span><br><span class="line">                            cst):next_position]  <span class="comment"># 截取出图片的二进制数据</span></span><br><span class="line">                        self.__frame = cv2.imdecode(</span><br><span class="line">                            np.frombuffer(bin_data, np.uint8),</span><br><span class="line">                            cv2.IMREAD_UNCHANGED)</span><br><span class="line">                        <span class="built_in">bytes</span> = <span class="built_in">bytes</span>[next_position:]</span><br><span class="line">                        now_position = <span class="number">0</span></span><br><span class="line">                response.close()  <span class="comment"># 释放连接。</span></span><br><span class="line">            <span class="keyword">except</span> Exception:</span><br><span class="line">                self.__running_flag = <span class="literal">False</span></span><br><span class="line">                <span class="keyword">raise</span> Exception(<span class="string">&#x27;服务端结束了视频&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        self.__running_flag = <span class="literal">True</span></span><br><span class="line">        threading.Thread(target=tmp).start()</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">read</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.isOpened():</span><br><span class="line">            self.<span class="built_in">open</span>()</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">if</span> self.__frame <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> <span class="built_in">id</span>(self.__frame) != <span class="built_in">id</span>(</span><br><span class="line">                    self.__last_frame):</span><br><span class="line">                self.__last_frame = self.__frame</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span>, self.__frame</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                time.sleep(<span class="number">0.001</span>)  <span class="comment"># 让出CPU</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">release</span>(<span class="params">self</span>):</span><br><span class="line">        self.__running_flag = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="string">&#x27;__main__&#x27;</span> == __name__:</span><br><span class="line">    camera = HttpCamera(<span class="string">&#x27;http://127.0.0.1:5000/video_feed&#x27;</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        ret, image = camera.read()</span><br><span class="line">        cv2.imshow(<span class="string">&#x27;image&#x27;</span>, image)</span><br><span class="line">        k = cv2.waitKey(<span class="number">1</span>) &amp; <span class="number">0xFF</span></span><br><span class="line">        <span class="keyword">if</span> <span class="number">27</span> == k:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">    cv2.destroyAllWindows()</span><br><span class="line">    camera.release()</span><br></pre></td></tr></table></figure>
+
+<p>模仿了<code>cv2.VideoCapture(X)</code>的接口，提供了<code>open</code>，<code>isOpened</code>，<code>read</code>和<code>release</code>的接口，感觉上就像一个普通的摄像头一样。</p>
+<p>每次调用<code>read</code>方法得到的都是最新的视频帧。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在本机上进行了测试，使用这种视频流方法的延迟平均在154ms左右，而rtmp的延迟则在700ms以上，总体来说还是较好地满足了我的需求。</p>
+<p>缺陷：</p>
+<ul>
+<li>我自己对自己的代码不太满意，不知道有没有更好的写法。</li>
+<li>不是很喜欢用python的多线程（个人看法）。</li>
+<li>没有很好地处理http连接发生错误的情况。</li>
+<li>解决方案本身缺陷，不是专业的视频推流协议，而且使用了<code>multipart/x-</code>的实验性特性，可能存在某些坑点。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/1243066710/" rel="prev" title="Hello World">
+                  <i class="fa fa-chevron-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/876751979/" rel="next" title="如何在计算机中表示时间？（上）">
+                  如何在计算机中表示时间？（上） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

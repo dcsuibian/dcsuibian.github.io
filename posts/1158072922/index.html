@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="JetBrains IDE设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JetBrains IDE设置">
+<meta property="og:url" content="http://example.com/posts/1158072922/index.html">
+<meta property="og:site_name" content="dcsuibian的blog">
+<meta property="og:description" content="JetBrains IDE设置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115003803449.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115003440440.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20220819225739106.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231114234234536.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115002839961.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231114234458322.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115002828825.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231114234719515.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231114235156094.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231114235400646.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231114235609678.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115000429652.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115000619610.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115000928662.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115032906249.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115001947439.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115033724163.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20231115002306722.png">
+<meta property="article:published_time" content="2023-11-14T15:33:35.000Z">
+<meta property="article:modified_time" content="2024-10-24T18:07:32.944Z">
+<meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="工具 Java JetBrains IDEA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wexcdn.com/img/image-20231115003803449.png">
+
+
+<link rel="canonical" href="http://example.com/posts/1158072922/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/1158072922/","path":"posts/1158072922/","title":"JetBrains IDE设置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>JetBrains IDE设置 | dcsuibian的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dcsuibian的blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E9%97%A8%E8%A7%81%E5%B1%B1"><span class="nav-text">开门见山</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE"><span class="nav-text">通用设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntelliJ-IDEA"><span class="nav-text">IntelliJ IDEA</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebStorm"><span class="nav-text">WebStorm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataGrip"><span class="nav-text">DataGrip</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E6%B3%A8"><span class="nav-text">备注</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A1%A5%E5%85%85%E8%AF%B4%E6%98%8E"><span class="nav-text">补充说明</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%85%E7%A9%BA%E9%A1%B9%E7%9B%AE%E7%BA%A7%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-text">清空项目级的设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%A6%E7%BB%86%E5%86%85%E5%AE%B9%EF%BC%88%E5%B8%A6%E5%9B%BE%EF%BC%89"><span class="nav-text">详细内容（带图）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E8%AE%BE%E7%BD%AE-1"><span class="nav-text">通用设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E6%96%B0UI"><span class="nav-text">关闭新UI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E4%BB%A3%E7%90%86"><span class="nav-text">开启代理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E4%B8%AD%E6%96%87%E6%8F%92%E4%BB%B6"><span class="nav-text">装中文插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E8%A1%8C%E5%88%86%E9%9A%94%E7%AC%A6%E4%B8%BA-n"><span class="nav-text">更改行分隔符为\n</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E4%B8%BAUTF-8"><span class="nav-text">更改字符编码为UTF-8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9%E7%BB%88%E7%AB%AF"><span class="nav-text">更改终端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%97%B6%E8%A1%8C%E4%B8%BA%E4%B8%8E%E9%A1%B9%E7%9B%AE%E6%89%93%E5%BC%80%E8%A1%8C%E4%B8%BA"><span class="nav-text">启动时行为与项目打开行为</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8%E4%B8%8D%E5%8C%BA%E5%88%86%E5%A4%A7%E5%B0%8F%E5%86%99"><span class="nav-text">代码补全不区分大小写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E8%AE%BE%E7%BD%AE%E5%90%8C%E6%AD%A5"><span class="nav-text">开启设置同步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntelliJ-IDEA-1"><span class="nav-text">IntelliJ IDEA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Maven%E8%AE%BE%E7%BD%AE"><span class="nav-text">Maven设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebStorm-1"><span class="nav-text">WebStorm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-js%E8%AE%BE%E7%BD%AE"><span class="nav-text">Node.js设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8Prettier%E9%85%8D%E7%BD%AE"><span class="nav-text">自动Prettier配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DataGrip-1"><span class="nav-text">DataGrip</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95"><span class="nav-text">默认项目目录</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/1158072922/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dcsuibian的blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="JetBrains IDE设置 | dcsuibian的blog">
+      <meta itemprop="description" content="JetBrains IDE设置">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JetBrains IDE设置
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-11-14 23:33:35" itemprop="dateCreated datePublished" datetime="2023-11-14T23:33:35+08:00">2023-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-25 02:07:32" itemprop="dateModified" datetime="2024-10-25T02:07:32+08:00">2024-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">JetBrains IDE设置</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="开门见山"><a href="#开门见山" class="headerlink" title="开门见山"></a>开门见山</h2><h3 id="通用设置"><a href="#通用设置" class="headerlink" title="通用设置"></a>通用设置</h3><ol start="0">
+<li>Settings -&gt; Appearance &amp; Behavior -&gt; New UI（设置 -&gt; 外观与行为 -&gt; 新UI）。取消勾选<code>Enable new UI</code>（取消勾选<code>启用新UI</code>）。先不要重启。</li>
+<li>Settings -&gt; Appearance &amp; Behavior -&gt; System Settings -&gt; HTTP Proxy（设置 -&gt; 外观与行为 -&gt; 系统设置 -&gt; HTTP代理）。改成<code>Auto-detect proxy settings</code>（改成<code>自动检测代理设置</code>）。Apply应用。</li>
+<li>Settings -&gt; Plugins。安装中文插件。重启。</li>
+<li>新项目的设置 -&gt; 编辑器 -&gt; 代码样式。<code>行分隔符</code>选择<code>Unix 和 macOS (\n)</code>。</li>
+<li>新项目的设置 -&gt; 编辑器 -&gt; 文件编码。<code>项目编码</code>改成<code>UTF-8</code>。</li>
+<li>新项目的设置 -&gt; 工具 -&gt; 终端。<code>Shell路径</code>改成你pwsh的（如果你有装的话）。</li>
+<li>设置 -&gt; 外观与行为 -&gt; 系统设置。取消勾选<code>启动时重新打开项目</code>。<code>在以下位置打开项目</code>选则<code>新窗口</code>。</li>
+<li>设置 -&gt; 编辑器 -&gt; 常规 -&gt; 代码补全。取消勾选<code>区分大小写</code>。</li>
+<li>设置 -&gt; 设置同步。点击<code>启用设置同步...</code>。<code>在以下范围内同步设置：</code>选<code>仅XXX实例</code>。</li>
+</ol>
+<h3 id="IntelliJ-IDEA"><a href="#IntelliJ-IDEA" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h3><ol>
+<li>新项目的设置 -&gt; 构建、执行、部署 -&gt; 构建工具 -&gt; Maven。<code>Maven主路径</code>选择你安装的Maven位置。</li>
+</ol>
+<h3 id="WebStorm"><a href="#WebStorm" class="headerlink" title="WebStorm"></a>WebStorm</h3><ol>
+<li>新项目的设置 -&gt; 语言和框架 -&gt; Node.js。填上<code>Node解释器</code>和<code>软件包管理器 (M)</code>。</li>
+<li>新项目的设置 -&gt; 语言和框架 -&gt; JavaScript –&gt; Prettier。选择<code>自动Prettier配置 (A)</code>。</li>
+</ol>
+<h3 id="DataGrip"><a href="#DataGrip" class="headerlink" title="DataGrip"></a>DataGrip</h3><ol>
+<li>设置 -&gt; 外观与行为 -&gt; 系统设置。填上<code>默认项目目录</code>。</li>
+</ol>
+<h3 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h3><p>上文所说的<code>Settings</code>和<code>设置</code>对应下图的1，<code>新项目的设置</code>对应下图的2。</p>
+<img src="https://wexcdn.com/img/image-20231115003803449.png" alt="image-20231115003803449" style="zoom:67%;" />
+
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><p>JetBrains家的IDE都很好用。但要调整设置却颇为恶心。首先，在启动页面，你并不能更改设置信息。</p>
+<img src="https://wexcdn.com/img/image-20231115003440440.png" alt="image-20231115003440440" style="zoom: 50%;" />
+
+<p>必须等到你打开一个项目以后，才能在项目左上角的<code>文件 -&gt; 设置</code>和<code>文件 -&gt; 新建项目的设置 -&gt; 新项目的设置</code>里调整设置信息。因此，我建议在初期设置时创建一个<code>empty-dir</code>，等所有设置完成以后，再删掉它。</p>
+<p>另外，设置分成两种，<code>跟项目有关的</code>和<code>跟项目无关的</code>，<code>跟项目有关的</code>还分成<code>当前项目的</code>和<code>未来项目的</code>（即项目的默认设置）。容易出问题的地方在于：如果你从<code>文件 -&gt; 设置</code>点进去，那么你会看到的是<code>跟项目无关的</code>设置和<code>当前项目的</code>设置混合的结果。</p>
+<p>以更改项目编码为例，从<code>文件 -&gt; 设置</code>和<code>文件 -&gt; 新建项目的设置 -&gt; 新项目的设置</code>点进去都有文件编码设置。但如果你是只是设置了前者，比如改成了UTF-8，那下次打开其他项目可能还是默认的GBK（如果你是Windows的话）。所以一定要小心。</p>
+<h3 id="清空项目级的设置"><a href="#清空项目级的设置" class="headerlink" title="清空项目级的设置"></a>清空项目级的设置</h3><p>IDEA会把项目相关的设置放在对应文件夹下的<code>.idea</code>文件夹里（隐藏的）。</p>
+<p><img src="https://wexcdn.com/img/image-20220819225739106.png" alt="image-20220819225739106"></p>
+<p>如果你要清空一个项目的设置，请</p>
+<ol>
+<li>关闭IDEA的当前项目窗口</li>
+<li>删除<code>.idea</code>文件夹</li>
+<li>重新打开这个项目</li>
+</ol>
+<p><strong>如果你的项目已经配置了很多信息，或者你使用的是DataGrip，不要轻易这么做。</strong></p>
+<h2 id="详细内容（带图）"><a href="#详细内容（带图）" class="headerlink" title="详细内容（带图）"></a>详细内容（带图）</h2><h3 id="通用设置-1"><a href="#通用设置-1" class="headerlink" title="通用设置"></a>通用设置</h3><h4 id="关闭新UI"><a href="#关闭新UI" class="headerlink" title="关闭新UI"></a>关闭新UI</h4><p>我的个人喜好，我不太喜欢新的UI。</p>
+<p><img src="https://wexcdn.com/img/image-20231114234234536.png" alt="image-20231114234234536"></p>
+<p><img src="https://wexcdn.com/img/image-20231115002839961.png" alt="image-20231115002839961"></p>
+<h4 id="开启代理"><a href="#开启代理" class="headerlink" title="开启代理"></a>开启代理</h4><p>JB家IDE默认是不使用代理的，所以一定要把这个打开。如果你本来就没有代理，这个对你没有影响。但如果你有网络优化工具的话，这个选项的作用就很大了。这个是网络设置，会影响到插件的安装。<strong>一定要设置好这个并应用后再去装插件。</strong></p>
+<p><img src="https://wexcdn.com/img/image-20231114234458322.png" alt="image-20231114234458322"></p>
+<p><img src="https://wexcdn.com/img/image-20231115002828825.png" alt="image-20231115002828825"></p>
+<h4 id="装中文插件"><a href="#装中文插件" class="headerlink" title="装中文插件"></a>装中文插件</h4><p>对英文不好的同学来说，重要性不用多说了吧。</p>
+<p><img src="https://wexcdn.com/img/image-20231114234719515.png" alt="image-20231114234719515"></p>
+<h4 id="更改行分隔符为-n"><a href="#更改行分隔符为-n" class="headerlink" title="更改行分隔符为\n"></a>更改行分隔符为<code>\n</code></h4><p>建议配合以下命令使用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.autocrlf false</span><br><span class="line">git config --global core.safecrlf true</span><br></pre></td></tr></table></figure>
+
+<p>如果你不懂什么意思的话，百度或谷歌一下吧。</p>
+<p><img src="https://wexcdn.com/img/image-20231114235156094.png" alt="image-20231114235156094"></p>
+<h4 id="更改字符编码为UTF-8"><a href="#更改字符编码为UTF-8" class="headerlink" title="更改字符编码为UTF-8"></a>更改字符编码为UTF-8</h4><p><img src="https://wexcdn.com/img/image-20231114235400646.png" alt="image-20231114235400646"></p>
+<h4 id="更改终端"><a href="#更改终端" class="headerlink" title="更改终端"></a>更改终端</h4><p><img src="https://wexcdn.com/img/image-20231114235609678.png" alt="image-20231114235609678"></p>
+<ul>
+<li>我个人会自行安装最新版本的PowerShell（目前是v7），也就是这里的<code>pwsh.exe</code>，你没安装就没有</li>
+<li>老版本的IDEA可能默认使用的是cmd，非常不推荐</li>
+</ul>
+<h4 id="启动时行为与项目打开行为"><a href="#启动时行为与项目打开行为" class="headerlink" title="启动时行为与项目打开行为"></a>启动时行为与项目打开行为</h4><p><img src="https://wexcdn.com/img/image-20231115000429652.png" alt="image-20231115000429652"></p>
+<h4 id="代码补全不区分大小写"><a href="#代码补全不区分大小写" class="headerlink" title="代码补全不区分大小写"></a>代码补全不区分大小写</h4><p><img src="https://wexcdn.com/img/image-20231115000619610.png" alt="image-20231115000619610"></p>
+<h4 id="开启设置同步"><a href="#开启设置同步" class="headerlink" title="开启设置同步"></a>开启设置同步</h4><p><img src="https://wexcdn.com/img/image-20231115000928662.png" alt="image-20231115000928662"></p>
+<h3 id="IntelliJ-IDEA-1"><a href="#IntelliJ-IDEA-1" class="headerlink" title="IntelliJ IDEA"></a>IntelliJ IDEA</h3><h4 id="Maven设置"><a href="#Maven设置" class="headerlink" title="Maven设置"></a>Maven设置</h4><p><img src="https://wexcdn.com/img/image-20231115032906249.png" alt="image-20231115032906249"></p>
+<h3 id="WebStorm-1"><a href="#WebStorm-1" class="headerlink" title="WebStorm"></a>WebStorm</h3><h4 id="Node-js设置"><a href="#Node-js设置" class="headerlink" title="Node.js设置"></a>Node.js设置</h4><p><img src="https://wexcdn.com/img/image-20231115001947439.png" alt="image-20231115001947439"></p>
+<h4 id="自动Prettier配置"><a href="#自动Prettier配置" class="headerlink" title="自动Prettier配置"></a>自动Prettier配置</h4><p><img src="https://wexcdn.com/img/image-20231115033724163.png" alt="image-20231115033724163"></p>
+<h3 id="DataGrip-1"><a href="#DataGrip-1" class="headerlink" title="DataGrip"></a>DataGrip</h3><h4 id="默认项目目录"><a href="#默认项目目录" class="headerlink" title="默认项目目录"></a>默认项目目录</h4><p><img src="https://wexcdn.com/img/image-20231115002306722.png" alt="image-20231115002306722"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B7%A5%E5%85%B7-Java-JetBrains-IDEA/" rel="tag"># 工具 Java JetBrains IDEA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/4103675269/" rel="prev" title="SSH Cheat Sheet">
+                  <i class="fa fa-chevron-left"></i> SSH Cheat Sheet
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/2211312634/" rel="next" title="《塞尔达传说：王国之泪》全收集心得（不用BUG）">
+                  《塞尔达传说：王国之泪》全收集心得（不用BUG） <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Harbor（一个开源的镜像仓库）的使用记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Harbor使用小记">
+<meta property="og:url" content="http://example.com/posts/315853384/index.html">
+<meta property="og:site_name" content="dcsuibian的blog">
+<meta property="og:description" content="Harbor（一个开源的镜像仓库）的使用记录">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201202929859.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201204309142.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201204634100.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201210623683.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201210754293.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201210955021.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201211726802.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201211900787.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201212654257.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201212800072.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201213352354.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201213455685.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201213616932.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201213939855.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201215008718.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201215108994.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201215132308.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201215155904.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201215219144.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201215307711.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201220012570.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201220431475.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201224457177.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201225322759.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201225726371.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201225858521.png">
+<meta property="og:image" content="https://wexcdn.com/img/image-20250201230111334.png">
+<meta property="article:published_time" content="2025-02-01T15:14:46.000Z">
+<meta property="article:modified_time" content="2025-02-01T15:17:53.899Z">
+<meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="Harbor Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wexcdn.com/img/image-20250201202929859.png">
+
+
+<link rel="canonical" href="http://example.com/posts/315853384/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/315853384/","path":"posts/315853384/","title":"Harbor使用小记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Harbor使用小记 | dcsuibian的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dcsuibian的blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Harbor%E4%BD%BF%E7%94%A8%E5%B0%8F%E8%AE%B0"><span class="nav-text">Harbor使用小记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-text">缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-pull%E5%BF%85%E9%A1%BB%E5%8A%A0%E4%B8%8A%E5%89%8D%E7%BC%80"><span class="nav-text">docker pull必须加上前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%87%8D%E5%90%AF%E5%90%8E%E5%BE%88%E5%AE%B9%E6%98%93%E5%90%AF%E5%8A%A8%E4%B8%8D%E4%BA%86"><span class="nav-text">系统重启后很容易启动不了</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E8%AE%B0%E5%BD%95"><span class="nav-text">过程记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0%E3%80%81Harbor%E5%AE%98%E7%BD%91"><span class="nav-text">0、Harbor官网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81Harbor%E5%85%88%E5%86%B3%E6%9D%A1%E4%BB%B6"><span class="nav-text">1、Harbor先决条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81%E4%B8%8B%E8%BD%BDHarbor"><span class="nav-text">2、下载Harbor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">3、修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E3%80%81%E8%BF%90%E8%A1%8C%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="nav-text">4、运行安装脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5%E3%80%81%E9%95%9C%E5%83%8FDocker-Hub"><span class="nav-text">5、镜像Docker Hub</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E3%80%81%E5%9C%A8%E5%8F%A6%E4%B8%80%E5%8F%B0%E4%B8%BB%E6%9C%BA%E4%B8%8A%E6%B5%8B%E8%AF%95"><span class="nav-text">6、在另一台主机上测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7%E3%80%81%E6%8E%A8%E9%80%81%E9%95%9C%E5%83%8F"><span class="nav-text">7、推送镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%E3%80%81%E8%BF%90%E8%A1%8C%E6%8E%A8%E9%80%81%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-text">8、运行推送的镜像</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/315853384/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dcsuibian的blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Harbor使用小记 | dcsuibian的blog">
+      <meta itemprop="description" content="Harbor（一个开源的镜像仓库）的使用记录">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Harbor使用小记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-01 23:14:46 / 修改时间：23:17:53" itemprop="dateCreated datePublished" datetime="2025-02-01T23:14:46+08:00">2025-02-01</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">Harbor（一个开源的镜像仓库）的使用记录</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Harbor使用小记"><a href="#Harbor使用小记" class="headerlink" title="Harbor使用小记"></a>Harbor使用小记</h1><p>Harbor是一个开源的镜像仓库。详情可以去<a target="_blank" rel="noopener" href="https://goharbor.io/">Harbor官网</a>或<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor">GitHub项目</a>了解更多详情，这里就不作更多介绍。</p>
+<p>这篇文章是对我使用Harbor的过程和其中发现的坑点做一个记录。</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ol>
+<li>建立一个内网私有镜像仓库</li>
+<li>缓存从Docker Hub下载的镜像，加速内网其他机器的拉取</li>
+</ol>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><h3 id="docker-pull必须加上前缀"><a href="#docker-pull必须加上前缀" class="headerlink" title="docker pull必须加上前缀"></a><code>docker pull</code>必须加上前缀</h3><p>先说一个很重要的点，Harbor可以作为镜像代理，但在<code>docker pull</code>时必须要加上前缀（<code>Harbor服务器/Harbor项目名</code>）。详情请看<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/issues/21339">GitHub上的这个issue</a>。</p>
+<p>什么意思？</p>
+<p>如果你以前用过阿里云的镜像加速器的话，那你一定知道，进行如下配置后：</p>
+<p><img src="https://wexcdn.com/img/image-20250201202929859.png" alt="image-20250201202929859"></p>
+<p>你可以直接使用<code>docker pull xxx</code>来拉取Docker Hub的<code>xxx</code>镜像，其中流量会走这个镜像加速器。</p>
+<p>但对于Harbor来说，你必须使用<code>docker pull Harbor服务器/Harbor项目名/xxx</code>才可以。</p>
+<h3 id="系统重启后很容易启动不了"><a href="#系统重启后很容易启动不了" class="headerlink" title="系统重启后很容易启动不了"></a>系统重启后很容易启动不了</h3><p>详见<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/issues/12334">这个issue</a>。</p>
+<p>这时候需要<code>cd</code>进<code>harbor</code>文件夹（里面有个<code>docker-compose.yml</code>），然后<code>sudo docker compose restart</code>。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>操作系统：Debian 12</li>
+<li>Docker：最新版</li>
+<li>Harbor版本：v2.12.2（最新）</li>
+<li>Harbor文档版本：2.12.0（最新）</li>
+<li>辅助工具：VSCode（带Remote - SSH插件）</li>
+<li>正常的网络连接（需要用到代理的地方我会说明的）</li>
+</ul>
+<h2 id="过程记录"><a href="#过程记录" class="headerlink" title="过程记录"></a>过程记录</h2><h3 id="0、Harbor官网"><a href="#0、Harbor官网" class="headerlink" title="0、Harbor官网"></a>0、Harbor官网</h3><p>首先，我们去Harbor官网：</p>
+<p><img src="https://wexcdn.com/img/image-20250201204309142.png" alt="image-20250201204309142"></p>
+<p>其中Getting started会带你跳转到<a target="_blank" rel="noopener" href="https://goharbor.io/docs/2.12.0/install-config/">安装文档</a>，Download now会跳转到<a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/releases">GitHub的Releases页面</a>。让我们先看看安装文档（忽略掉使用k8s安装Harbor）：</p>
+<p><img src="https://wexcdn.com/img/image-20250201204634100.png" alt="image-20250201204634100"></p>
+<p>接下来都会按照这几步走。</p>
+<h3 id="1、Harbor先决条件"><a href="#1、Harbor先决条件" class="headerlink" title="1、Harbor先决条件"></a>1、Harbor先决条件</h3><p>详情可以自己去<a target="_blank" rel="noopener" href="https://goharbor.io/docs/2.12.0/install-config/installation-prereqs/">对应页面</a>看。总结一下就是硬件最小需要2 CPU、4 GB内存、40 GB存储空间，软件需要比较新的Docker Engine、Docker Compose、OpenSSL（前两个安装Docker后就会有，第三个应该是Debian自带了），网络端口需要80、443、4443（不要有其它软件占用了这几个端口，另外其实端口可以改）。</p>
+<p>所以基本要做的就是安装Docker，<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/debian/">Debian安装Docker</a>的过程我就省略了。</p>
+<p><strong>这里需要先设置代理，我的建议是修改<code>/etc/apt/apt.conf</code>，添加代理内容。</strong>具体怎么改我就不说了。</p>
+<p>另外要将当前用户添加到<code>docker</code>用户组里：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod -aG docker $USER</span><br></pre></td></tr></table></figure>
+
+<p>退出并重新登录后运行<code>docker ps</code>，看到以下内容就成功了：</p>
+<p><img src="https://wexcdn.com/img/image-20250201210623683.png" alt="image-20250201210623683"></p>
+<p>此时我们<code>docker pull</code>应该是会失败的，因为众所周知的网络原因（我们只给<code>apt</code>开了代理，<code>docker pull</code>没有设置代理）：</p>
+<p><img src="https://wexcdn.com/img/image-20250201210754293.png" alt="image-20250201210754293"></p>
+<h3 id="2、下载Harbor"><a href="#2、下载Harbor" class="headerlink" title="2、下载Harbor"></a>2、下载Harbor</h3><p><a target="_blank" rel="noopener" href="https://github.com/goharbor/harbor/releases/tag/v2.12.2">Harbor v2.12.2</a>。</p>
+<p>一定要下载offline的这个。</p>
+<p><img src="https://wexcdn.com/img/image-20250201210955021.png" alt="image-20250201210955021"></p>
+<p>你想的话还可以下载<code>md5sum</code>验证下，我就不弄了。</p>
+<p>然后把他传到Debian上。（你可以用<code>scp</code>命令，我就直接使用VSCode拖进去了）</p>
+<p>我是放到了<code>家目录/softwares/Harbor</code>目录中。</p>
+<p><img src="https://wexcdn.com/img/image-20250201211726802.png" alt="image-20250201211726802"></p>
+<p><code>cd</code>到对应目录，然后解压：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf harbor-offline-installer-v2.12.2.tgz</span><br></pre></td></tr></table></figure>
+
+<p>完成后会出现一个<code>harbor</code>文件夹：</p>
+<p><img src="https://wexcdn.com/img/image-20250201211900787.png" alt="image-20250201211900787"></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd harbor # 进入对应文件夹</span><br><span class="line">cp harbor.yml.tmpl harbor.yml # 前者是模板文件，后者才是我们真正要用的</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、修改配置文件"><a href="#3、修改配置文件" class="headerlink" title="3、修改配置文件"></a>3、修改配置文件</h3><p>因为我只在内网使用，所以有所简化。并没有完全安装官方文档来。</p>
+<p>总的来说就是改<code>harbor.yml</code>：</p>
+<p><img src="https://wexcdn.com/img/image-20250201212654257.png" alt="image-20250201212654257"></p>
+<p><img src="https://wexcdn.com/img/image-20250201212800072.png" alt="image-20250201212800072"></p>
+<ol>
+<li><code>hostname</code>我改成了我这台Debian的IP地址<code>192.168.81.198</code>，你应该改成你的IP或域名</li>
+<li><code>http</code>相关的设置我保持了不变</li>
+<li><code>https</code>的我全部注释掉了，因为我在局域网，不需要HTTPS</li>
+<li><code>harbor_admin_password</code>是Harbor中<code>admin</code>账户的初始密码，我没改</li>
+<li><code>data_volume</code>从<code>/data</code>改成了<code>/data/harbor</code></li>
+<li><strong><code>proxy</code>里的比较重要，你需要改成你的代理服务器，因为Harbor要从Docker Hub拉镜像的话也得要代理</strong></li>
+<li>其他的我看不懂就没改</li>
+</ol>
+<h3 id="4、运行安装脚本"><a href="#4、运行安装脚本" class="headerlink" title="4、运行安装脚本"></a>4、运行安装脚本</h3><p><code>cd</code>到<code>harbor</code>目录下，然后：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ./install.sh</span><br></pre></td></tr></table></figure>
+
+<p>看到以下内容说明正常了：</p>
+<p><img src="https://wexcdn.com/img/image-20250201213352354.png" alt="image-20250201213352354"></p>
+<p>然后，通过IP地址访问Harbor。如果你没改过<code>admin</code>初始密码，那密码就是<code>Harbor12345</code>。</p>
+<p><img src="https://wexcdn.com/img/image-20250201213455685.png" alt="image-20250201213455685"></p>
+<p><img src="https://wexcdn.com/img/image-20250201213616932.png" alt="image-20250201213616932"></p>
+<h3 id="5、镜像Docker-Hub"><a href="#5、镜像Docker-Hub" class="headerlink" title="5、镜像Docker Hub"></a>5、镜像Docker Hub</h3><p>点击左侧“系统管理”下的“仓库管理”，点击“新建目标”，然后如下设置：</p>
+<p><img src="https://wexcdn.com/img/image-20250201213939855.png" alt="image-20250201213939855"></p>
+<p>其中访问ID和访问密码输入你Docker Hub的用户名和密码。（不输也可以，但是Docker官方对匿名用户拉取镜像非常严格）</p>
+<p>点击“测试连接”，如果没问题就点“确定”。</p>
+<p>接下来要创建项目，“项目”这个名词可能比较难以理解，他是Harbor中的一个逻辑分组单位。按我的说法他就是URL中的一段而已。请先继续看下去。</p>
+<p>点击左侧的“项目”，然后是“新建项目”，然后这么设置：</p>
+<p><img src="https://wexcdn.com/img/image-20250201215008718.png" alt="image-20250201215008718"></p>
+<p>待会儿你可以看到，项目名称<code>docker-hub</code>会成为URL中的一段。另外两个<code>-1</code>代表没有限制。</p>
+<p>接着，选择左侧“系统管理”的“机器人账户”，点击“添加机器人账户”：</p>
+<p><img src="https://wexcdn.com/img/image-20250201215108994.png" alt="image-20250201215108994"></p>
+<p><img src="https://wexcdn.com/img/image-20250201215132308.png" alt="image-20250201215132308"></p>
+<p><img src="https://wexcdn.com/img/image-20250201215155904.png" alt="image-20250201215155904"></p>
+<p><img src="https://wexcdn.com/img/image-20250201215219144.png" alt="image-20250201215219144"></p>
+<p><img src="https://wexcdn.com/img/image-20250201215307711.png" alt="image-20250201215307711"></p>
+<p>这里我偷懒给了所有权限了，因为我还没详细了解过Harbor的权限设计。</p>
+<p>建议使用“导出到文件”，防止你忘了。另外可以注意到我们输入的名字是<code>test</code>，但最终的名字是<code>robot$test</code>。</p>
+<h3 id="6、在另一台主机上测试"><a href="#6、在另一台主机上测试" class="headerlink" title="6、在另一台主机上测试"></a>6、在另一台主机上测试</h3><p>我这里搭建Harbor的主机是<code>192.168.81.198</code>，然后我选择在另一台Debian主机<code>192.168.81.190</code>上测试（这台我称为Harbor客户端，Harbor客户端上也得安装Docker）。</p>
+<p>修改Harbor客户端的<code>/etc/docker/daemon.json</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo vi /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wexcdn.com/img/image-20250201220012570.png" alt="image-20250201220012570"></p>
+<p>重启Docker：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>登录Harbor：</p>
+<p><img src="https://wexcdn.com/img/image-20250201220431475.png" alt="image-20250201220431475"></p>
+<p>现在，我们找个镜像<code>pull</code>一下试试看：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull 192.168.81.198/docker-hub/nginx:latest</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wexcdn.com/img/image-20250201224457177.png" alt="image-20250201224457177"></p>
+<p>可以看到<code>docker pull</code>以后对应的项目里就有了。证明他缓存了，你还可以删除镜像后再试一遍。</p>
+<p><strong>你可以发现，这里不能直接<code>docker pull nginx:latest</code>，这就是我说的缺点一。</strong></p>
+<h3 id="7、推送镜像"><a href="#7、推送镜像" class="headerlink" title="7、推送镜像"></a>7、推送镜像</h3><p>要推送镜像，我们首先得建一个项目：</p>
+<p><img src="https://wexcdn.com/img/image-20250201225322759.png" alt="image-20250201225322759"></p>
+<p>然后，在Harbor客户端上构建并推送一个简单的镜像：</p>
+<p><img src="https://wexcdn.com/img/image-20250201225726371.png" alt="image-20250201225726371"></p>
+<p>然后就可以在项目中看到了：</p>
+<p><img src="https://wexcdn.com/img/image-20250201225858521.png" alt="image-20250201225858521"></p>
+<h3 id="8、运行推送的镜像"><a href="#8、运行推送的镜像" class="headerlink" title="8、运行推送的镜像"></a>8、运行推送的镜像</h3><p><img src="https://wexcdn.com/img/image-20250201230111334.png" alt="image-20250201230111334"></p>
+<p>可以看到，成功了！！！（为了演示，我提前清空了Harbor客户端服务器的镜像）</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这是对我使用Harbor的一个记录，但是在写完这篇文章后我才发现：</p>
+<p><strong>Harbor不太好用，有不少问题。</strong></p>
+<p>我已经在考虑换一个软件了，不过如果你确定还是要用Harbor，那希望这篇文章可以帮助到你。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Harbor-Docker/" rel="tag"># Harbor Docker</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/2211312634/" rel="prev" title="《塞尔达传说：王国之泪》全收集心得（不用BUG）">
+                  <i class="fa fa-chevron-left"></i> 《塞尔达传说：王国之泪》全收集心得（不用BUG）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

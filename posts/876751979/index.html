@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="当需要在程序中表示时间时，我的最佳选择是什么？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在计算机中表示时间？（上）">
+<meta property="og:url" content="http://example.com/posts/876751979/index.html">
+<meta property="og:site_name" content="dcsuibian的blog">
+<meta property="og:description" content="当需要在程序中表示时间时，我的最佳选择是什么？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wexcdn.com/img/20210401221340.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210401221343.jpg">
+<meta property="og:image" content="https://wexcdn.com/img/20210401221342.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210401221341.gif">
+<meta property="article:published_time" content="2021-04-01T14:11:45.000Z">
+<meta property="article:modified_time" content="2024-10-24T18:07:32.946Z">
+<meta property="article:author" content="dcsuibian">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wexcdn.com/img/20210401221340.png">
+
+
+<link rel="canonical" href="http://example.com/posts/876751979/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/876751979/","path":"posts/876751979/","title":"如何在计算机中表示时间？（上）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何在计算机中表示时间？（上） | dcsuibian的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dcsuibian的blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0%E3%80%81%E5%89%8D%E8%A8%80"><span class="nav-text">0、前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1%E3%80%81%E6%97%B6%E9%97%B4%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">1、时间的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E6%97%B6"><span class="nav-text">原子时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%B8%B8%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-text">正常表示法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2%E3%80%81%E6%97%B6%E9%97%B4%E4%B8%8E%E8%AE%A1%E7%AE%97%E6%9C%BA"><span class="nav-text">2、时间与计算机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE"><span class="nav-text">建议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E6%99%AE%E9%80%9A%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="nav-text">对于普通程序员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E4%BA%8E%E7%89%B9%E6%AE%8A%E7%A8%8B%E5%BA%8F%E5%91%98"><span class="nav-text">对于特殊程序员</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">参考链接</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/876751979/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dcsuibian的blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何在计算机中表示时间？（上） | dcsuibian的blog">
+      <meta itemprop="description" content="当需要在程序中表示时间时，我的最佳选择是什么？">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何在计算机中表示时间？（上）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-01 22:11:45" itemprop="dateCreated datePublished" datetime="2021-04-01T22:11:45+08:00">2021-04-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-25 02:07:32" itemprop="dateModified" datetime="2024-10-25T02:07:32+08:00">2024-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">当需要在程序中表示时间时，我的最佳选择是什么？</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><br/>
+
+<h1 id="0、前言"><a href="#0、前言" class="headerlink" title="0、前言"></a>0、前言</h1><p>笔者没有很深入地了解过各种时间标准。要精确的表示一个时间是真的挺复杂的，其中涉及到的知识太多，笔者做不到完全掌握，也没有必要。</p>
+<p>本文尽量讲的通俗易懂，但定义可能就不精准，所以请以怀疑的眼光看待此文。如果有错误的地方，也恳请指出。</p>
+<h1 id="1、时间的定义"><a href="#1、时间的定义" class="headerlink" title="1、时间的定义"></a>1、时间的定义</h1><p>首先，回想一下，国际单位制中时间的基本单位是什么？答：秒。</p>
+<p>那么，“秒”的定义是什么？一般来说，我们说1天对应24小时，1小时对应60分钟，1分钟对应60秒。而”天“指的就是地球自转一周的时间。</p>
+<p>所以1秒就是1&#x2F;(24*60*60)&#x3D;1&#x2F;86400天，就是地球自转一周时间的1&#x2F;86,400。</p>
+<br/>
+
+<p>但是，地球自转一周的时间是变化的（貌似地球自转在加快，自转一周的时间越来越短）。如果采用原来的定义，那么1秒和1秒的时间长度可能是不同的。这对于某些对时间要求很苛刻的工作来说是不行的。</p>
+<h2 id="原子时"><a href="#原子时" class="headerlink" title="原子时"></a>原子时</h2><p>目前国际上对秒的定义是：</p>
+<blockquote>
+<p>秒，符号为s，国际单位制时间单位。其定义是，将铯-133原子不受扰动的基态超精细能级跃迁频率Δ<em>ν</em>Cs的值固定为9192631770<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%B5%AB%E8%8C%B2">赫兹</a>，赫兹等于s−1。</p>
+</blockquote>
+<p>看不懂吗？我也看不懂。为了方便起见，下文中就称它为”原子秒“吧。（”原子秒“这个称呼我不确定是否标准，但你get到意思就行）</p>
+<br/>
+
+<p>当然，肯定没有绝对精准的东西，不过嘛：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/1999%E5%B9%B4">1999年</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/12%E6%9C%8829%E6%97%A5">12月29日</a>，<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=NIST-F1_%E9%8A%AB%E5%8E%9F%E5%AD%90%E9%90%98&action=edit&redlink=1">NIST-F1 铯原子钟</a>其不确定度为1.5×10−15，相当于2000万年不差一秒。</p>
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/2020%E5%B9%B4">2020年</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/10%E6%9C%8827%E6%97%A5">10月27日</a>，国际计量局(BIPM)报导，<a href="ftp://ftp2.bipm.org/pub/tai/data/PSFS_reports/ptb-csf2_59149-59179.pdf">德国ptb-csf2铯原子钟</a>，在1亿8千7百万年的时间内的误差不会超过1秒钟(1.7 × 10−16) 。<a href="ftp://ftp2.bipm.org/pub/tai/data/PSFS_reports/syrte-fo2_59149-59179.pdf">法国syrte-fo2铯原子钟</a>，在1亿4千4百万年的时间内的误差不会超过1秒钟(2.2 × 10−16)。 <a href="ftp://ftp2.bipm.org/pub/tai/data/PSFS_reports/su-csfo2_59149-59179.pdf">俄罗斯su-csfo2铯原子钟</a>，在1亿4千4百万年的时间内的误差不会超过1秒钟(2.2 × 10−16)。</p>
+</blockquote>
+<p>看这些数据就知道误差有多小了，是真的可以忽略不计。所以，我们就简单的认为两个原子秒的时间长度就是完全一样的好了。</p>
+<br/>
+
+<p>那么既然有了原子秒，也就有了原子时</p>
+<blockquote>
+<p><strong>国际原子时</strong>（英语：International Atomic Time、法语：Temps Atomique International, <strong>TAI</strong>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%8E%9F%E5%AD%90%E6%99%82#cite_note-1">1]</a>）</p>
+<p>其起点为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E6%97%B6">世界时</a>1958年的开始。</p>
+</blockquote>
+<p>貌似国际原子时的简称一般是TAI而不是IAT，不过这个不重要。</p>
+<p>总之我们就简单的认为原子时就是从1958年1月1日0时0分0秒（UT）以来经过的原子秒数。（这里的UT是世界时，就是以英国格林尼治那旮沓为准）</p>
+<br/>
+
+<p>到这里我不免畅想一下，如果大家都用国际原子时那该有多好啊……</p>
+<p>当然，那是不可能的。如果你问我现在是什么时间？我告诉你XXXXXXXXX秒，那你一定会想打死我。</p>
+<h2 id="正常表示法"><a href="#正常表示法" class="headerlink" title="正常表示法"></a>正常表示法</h2><p>接下来我们仍然要回到正常的时间表示法，也就是采用年、月、日、时、分、秒的表示法。</p>
+<br/>
+
+<p>建议阅读下面这篇文章。</p>
+<p><a target="_blank" rel="noopener" href="https://pansci.asia/archives/84978">到底是 GMT+8 還是 UTC+8 ?</a></p>
+<blockquote>
+<p><strong>格林尼治平均时间</strong>（英语：<strong>G</strong>reenwich <strong>M</strong>ean <strong>T</strong>ime，<strong>GMT</strong>）是指位于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%8B%B1%E5%9C%8B">英国</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%80%AB%E6%95%A6">伦敦</a>郊区的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E6%9E%97%E5%B0%BC%E6%B2%BB%E5%A4%A9%E6%96%87%E5%8F%B0">皇家格林尼治天文台</a>当地的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%B9%B3%E5%A4%AA%E9%98%B3">平太阳时</a>，因为<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%9C%AC%E5%88%9D%E5%AD%90%E5%8D%88%E7%B7%9A">本初子午线</a>被定义为通过那里的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%93%E7%B7%9A">经线</a>。</p>
+</blockquote>
+<p>当我查GMT的时候，出现了“平太阳时”，当我查“平太阳时”的时候，又出现了各种奇奇怪怪的名词，干脆我就不管了。</p>
+<p>简单地说，GMT就是以格林尼治那旮沓为准的时间，也就是我们目前的时间标准。</p>
+<p>尽管GMT也想了各种办法让自己的时间尽量精确，但如前所述，地球自转时间在变，这就导致GMT不可能绝对精准。</p>
+<br/>
+
+<p>所以接下来就出现了UTC。</p>
+<blockquote>
+<p><strong>协调世界时</strong>（英语：<strong>C</strong>oordinated <strong>U</strong>niversal <strong>T</strong>ime，法语：<strong>T</strong>emps <strong>U</strong>niversel <strong>C</strong>oordonné，简称<strong>UTC</strong>）是最主要的世界时间标准，其以<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8E%9F%E5%AD%90%E6%97%B6">原子时</a>秒长为基础，在时刻上尽量接近于**<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E6%9E%97%E5%A8%81%E6%B2%BB%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4">格林威治标准时间</a>**。</p>
+</blockquote>
+<p>UTC采用了原子秒，这样就很精准了。UTC也把时间分为天、小时、分钟和秒。</p>
+<p>但是，出现了问题，如果我们很简单的这样做了。那么由于原子秒和普通秒的差，不断累计下去，在未来，一个人一看手表显示14:00，却处在黑夜中的情况，这样就不利于人们交流了。</p>
+<p>所以，UTC中还有一个“闰秒”的机制，让它来尽量接近GMT时间。</p>
+<blockquote>
+<p>协调世界时把时间分为天、小时、分钟和秒。通常，天是使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E9%87%8C%E5%8E%86">格里历</a>（公历）定义的，但也能使用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%84%92%E7%95%A5%E6%97%A5">儒略日</a>。每天包含24小时，每小时包含60分钟。一分钟通常有60秒，但加入了随机的闰秒后，一分钟可能是61秒或59秒[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6#cite_note-FOOTNOTEITU_Radiocommunication_Assembly20023-12">12]</a>。因此，在UTC系统的时间尺度中，秒和比秒小的单位（毫秒、微秒等）其长度是固定的，但是对于分钟和比分还大的单位（小时、天、周等），其长度是可变的。国际地球自转服务组织（IERS）做出插入闰秒的决定，并至少在加入前6个月发布在该组织的“公告C”中[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6#cite_note-FOOTNOTEInternational_Earth_Rotation_and_Reference_Systems_Service2011-13">13]</a>[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6#cite_note-FOOTNOTEMcCarthySeidelmann2009229-14">14]</a> 。闰秒是无法提前很早预知的，因为地球的自转速率是不可预测的[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6#cite_note-FOOTNOTEMcCarthySeidelmann2009chapter_4-15">15]</a>。</p>
+</blockquote>
+<p>UTC时间中“1秒”就是1原子秒，但1分钟可能有61原子秒或59原子秒。闰秒是全世界大家一起加或减的，所以UTC时间仍然不会出现偏差。</p>
+<p>不管怎样，“闰秒”的出现保证了保证协调世界时（UTC）与<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E4%B8%96%E7%95%8C%E6%97%B6">世界时</a>（UT1）相差不超过0.9秒[<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6#cite_note-FOOTNOTENational_Institute_of_Standards_and_Technology2012-9">9]</a>。</p>
+<p>（麻烦把UT1视作GMT就好，不要再管这里面的差别了）</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>UTC采用原子秒，更加准确。但如果你是一个普通人，真的就不用在意这些细节，因为此时的UTC和GMT相差不会超过0.9秒，基本可以认为是一样的。</p>
+<p>当然，如果你从事的行业对时间要求很苛刻，比如科学、金融、军事等领域。那么请忘掉我上面说的所有东西（因为我可能已经误导了你），请专业人士对你进行培训。</p>
+<h1 id="2、时间与计算机"><a href="#2、时间与计算机" class="headerlink" title="2、时间与计算机"></a>2、时间与计算机</h1><p>在计算机上我们肯定也要跟时间打交道，如何处理、存储时间类型的数据？接下来介绍这方面的内容。</p>
+<h2 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h2><p>那么，首先我要告诉你一件非常重要的事：</p>
+<p>如果大概了解了UTC、GMT的区别，知道了闰秒的概念。那么，请忘记它。</p>
+<p>请把GMT视作UTC，把1天就看做86400秒，把每天和每秒的长度看作是等长的。</p>
+<br/>
+
+<p>为什么？</p>
+<h2 id="对于普通程序员"><a href="#对于普通程序员" class="headerlink" title="对于普通程序员"></a>对于普通程序员</h2><p>因为几乎所有现代操作系统都假设在所有情况下1天&#x3D; 24×60×60 &#x3D; 86400秒。如Windows,Linux,Apple,Android都对闰秒无知。</p>
+<p>而且就算要设计，也非常麻烦，因为什么时候出现闰秒，取决于地球自身转速的变化，是不能预测的。所以干脆就不设计了。</p>
+<p>所以如果你的程序，是建立在一个不准确的操作系统之上的，那么你也不可能得到一个准确的时间值。</p>
+<br/>
+
+<p>简单地说，如果你是普通应用型程序员，就别考虑那么多了。</p>
+<br/>
+
+<p>说实在的，个人计算机的时间本来就不怎么准确，时间的变动本来就有点随意，所以影响不是很大。</p>
+<br/>
+
+<p>如果你问我，那为什么感觉我的计算机时间很准呢？最主要是，为什么我的多台PC之间、PC与手机、手机与iPad之间的时间基本都是同步的呢？</p>
+<p>这是通过NTP（Network Time Protocol）来达到的，简单的说就是时不时地用网络进行对时，所以对人来说，感觉上大概就是准的。</p>
+<p>如果你打开电脑的时间设置可以看到：</p>
+<img src="https://wexcdn.com/img/20210401221340.png" alt="image-20210401141020554" style="zoom:150%;" />
+
+<p>电脑是可以自动调节时间甚至是时区的。</p>
+<p>而手机上也有：</p>
+<img src="https://wexcdn.com/img/20210401221343.jpg" alt="6b5512a9-aa8d-44e9-b370-9ae52078cccf" style="zoom: 25%;" />
+
+<br/>
+
+<p>这里我真的试了一下，关闭了NTP，把电脑的时间调到1个月前。电脑还是正常运行，网页也能正常浏览。并没有什么问题。</p>
+<img src="https://wexcdn.com/img/20210401221342.png" alt="image-20210301141401660" style="zoom: 67%;" />
+
+<br/>
+
+<p>我们再用程序测试一下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            System.out.println(<span class="keyword">new</span> <span class="title class_">Date</span>().getTime());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<img src="https://wexcdn.com/img/20210401221341.gif" alt="0f74465a2629a077f0dbecc82e3a977"  />
+
+<p>这里我将电脑的时间改成了1991年，然后又改了回来，所以你会看到数字变小又变大。</p>
+<p>可以看到，以上用Java程序执行的代码中，因为依赖于系统时间，所以后执行的代码得到的时间反而变小了。</p>
+<br/>
+
+<p>这就说明系统时间确实有一定的不可靠性。用看到的一句话总结：</p>
+<blockquote>
+<p>程序本来就应该认为本机的时间是不准的。</p>
+</blockquote>
+<h2 id="对于特殊程序员"><a href="#对于特殊程序员" class="headerlink" title="对于特殊程序员"></a>对于特殊程序员</h2><p>虽说一般程序员可能不用考虑这么多问题，对于某些特殊的程序员还是比较麻烦的。</p>
+<p>如果你设计的程序跑在一台连接着原子钟的计算机上，作为NTP的上游，那么我不知道你要做什么。</p>
+<p>但如果你的程序跑在NTP的下游，比如说，你就是一个系统程序员，那我大概知道你要做什么。</p>
+<br/>
+
+<blockquote>
+<p>当要增加正闰秒时，这一秒是增加在第二天的00:00:00之前，效果是延缓UTC第二天的开始。当天23:59:59的下一秒被记为23:59:60，然后才是第二天的00:00:00。如果是负闰秒的话，23:59:58的下一秒就是第二天的00:00:00了，但目前还没有负闰秒调整的需求。</p>
+</blockquote>
+<p>让我们回顾一下，闰秒是为了协调UTC和GMT时间的，它可以加1秒（正闰秒）也可以减1秒（负闰秒，没发生过）。</p>
+<p>再看一下NTP：</p>
+<blockquote>
+<p>NTP意图将所有参与计算机的<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6">协调世界时</a>（UTC）时间<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%90%8C%E6%AD%A5">同步</a>到几<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AF%AB%E7%A7%92">毫秒</a>的误差内。</p>
+</blockquote>
+<p>可以看到，NTP是以UTC时间为准的。我们不考虑NTP上游怎么处理的，只考虑下游。</p>
+<p>事实上，下游的计算机处理不好时，就会出现“闰秒危机”：</p>
+<p>闰秒危机的问题是当NTP传入23:59:60这个时间，秒的位置出现了60。而下游计算机看到了这个60，无法理解，不知道怎么处理，可能就会发生异常。</p>
+<p>我们可以看到，闰秒危机的原因是下游计算机系统无法理解这个60。</p>
+<p>（“负闰秒”应该不会出现闰秒危机，因为只是从23:59:58直接到00:00:00，下游计算机完全可以把这看做自己的表走慢了，然后纠正就好。）</p>
+<br/>
+
+<p>所以如果你是一个系统程序员，那么对你来说最重要的就是在处理NTP接收到的时间时考虑60这个秒数，认为它是合法的，只要不触发异常，不崩溃就行，自己消化掉，不影响上层应用。仍然表现出1天86400秒的样子。</p>
+<br/>
+
+<p>那么如果我现在用的操作系统就是不能处理60这个数字怎么办，也没办法迁移软件怎么办？</p>
+<p>其实这应该是运维的事了：</p>
+<ol>
+<li>在闰秒出现前关闭NTP，结束后重新开启NTP。</li>
+<li>Well，解决不了问题，就解决提出问题的人：从上游解决。</li>
+</ol>
+<br/>
+
+<p>下面说说2：</p>
+<blockquote>
+<p><strong>阿里云ECS云服务器采用的方案是，将多出来的这一秒分平均分配到24小时（即86400秒）中，在闰秒时刻前12小时开始，闰秒后12小时结束。</strong></p>
+</blockquote>
+<h1 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8F%E8%B0%83%E4%B8%96%E7%95%8C%E6%97%B6">协调世界时</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%A0%BC%E6%9E%97%E5%B0%BC%E6%B2%BB%E6%A8%99%E6%BA%96%E6%99%82%E9%96%93">格林尼治标准时间</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%A7%92">秒</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8E%9F%E5%AD%90%E9%90%98">原子钟</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%9C%8B%E9%9A%9B%E5%8E%9F%E5%AD%90%E6%99%82">国际原子时</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%B6%B2%E8%B7%AF%E6%99%82%E9%96%93%E5%8D%94%E5%AE%9A">NTP</a></li>
+<li><a target="_blank" rel="noopener" href="https://pansci.asia/archives/84978">到底是 GMT+8 還是 UTC+8 ?</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27500849">「闰秒」会对 IT 行业造成多大影响？有什么好的解决方法？</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/583835402/" rel="prev" title="Python配合multipart/x-mixed-replace实现实时视频传输">
+                  <i class="fa fa-chevron-left"></i> Python配合multipart/x-mixed-replace实现实时视频传输
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/76702091/" rel="next" title="'Uncaught TypeError: this.xhr.upload.addEventListener is not a function'解决方案">
+                  'Uncaught TypeError: this.xhr.upload.addEventListener is not a function'解决方案 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

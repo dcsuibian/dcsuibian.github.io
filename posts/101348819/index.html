@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Maven与PowerShell命令冲突">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决&quot;The goal you specified requires a project to execute but there is no POM in this directory&quot;问题">
+<meta property="og:url" content="http://example.com/posts/101348819/index.html">
+<meta property="og:site_name" content="dcsuibian的blog">
+<meta property="og:description" content="Maven与PowerShell命令冲突">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wexcdn.com/img/20210507150216.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210507150219.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210507150250.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210507150242.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210507150225.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210507150227.png">
+<meta property="article:published_time" content="2021-05-07T06:31:56.000Z">
+<meta property="article:modified_time" content="2024-10-24T18:07:32.952Z">
+<meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="Windows PowerShell Maven">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wexcdn.com/img/20210507150216.png">
+
+
+<link rel="canonical" href="http://example.com/posts/101348819/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/101348819/","path":"posts/101348819/","title":"解决\"The goal you specified requires a project to execute but there is no POM in this directory\"问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>解决"The goal you specified requires a project to execute but there is no POM in this directory"问题 | dcsuibian的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dcsuibian的blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%83%85%E6%99%AF%E5%86%8D%E7%8E%B0"><span class="nav-text">情景再现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E3%80%81%E4%BD%BF%E7%94%A8%E4%BA%A4%E4%BA%92%E5%BC%8F%E6%96%B9%E6%A1%88%E6%9E%84%E5%BB%BA"><span class="nav-text">1、使用交互式方案构建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E3%80%81%E5%81%B6%E7%84%B6%E5%8F%91%E7%8E%B0%E5%9C%A8mac%E4%B8%8A%E8%83%BD%E5%A4%9F%E6%9E%84%E5%BB%BA%E6%88%90%E5%8A%9F%E3%80%82"><span class="nav-text">2、偶然发现在mac上能够构建成功。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E3%80%81%E4%BD%BF%E7%94%A8CMD%E6%89%A7%E8%A1%8C"><span class="nav-text">3、使用CMD执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4%E3%80%81PowerShell%E9%97%AE%E9%A2%98"><span class="nav-text">4、PowerShell问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">解决方案</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/101348819/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dcsuibian的blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="解决"The goal you specified requires a project to execute but there is no POM in this directory"问题 | dcsuibian的blog">
+      <meta itemprop="description" content="Maven与PowerShell命令冲突">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          解决"The goal you specified requires a project to execute but there is no POM in this directory"问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-07 14:31:56" itemprop="dateCreated datePublished" datetime="2021-05-07T14:31:56+08:00">2021-05-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-25 02:07:32" itemprop="dateModified" datetime="2024-10-25T02:07:32+08:00">2024-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">Maven与PowerShell命令冲突</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="情景再现"><a href="#情景再现" class="headerlink" title="情景再现"></a>情景再现</h1><p>今天是2021年5月7日。用的是最新的Maven 3.8.1。</p>
+<p><img src="https://wexcdn.com/img/20210507150216.png" alt="image-20210507143512110"></p>
+<p>跟随<a target="_blank" rel="noopener" href="https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html">官方教程</a>输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false</span><br></pre></td></tr></table></figure>
+
+<p>却得到了这样的结果：</p>
+<p><img src="https://wexcdn.com/img/20210507150219.png" alt="image-20210507143753157"></p>
+<p>生成失败，提示缺少POM文件。</p>
+<p>看这报错信息就奇怪了，官方的例子就是这么写的啊：根据原型生成项目、非交互模式、给出了所有需要的参数，看起来没什么问题。</p>
+<p>虽然找个<code>pom.xml</code>不难，但Maven你一个构建工具，肯定应该能自己生成的啊。</p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="1、使用交互式方案构建"><a href="#1、使用交互式方案构建" class="headerlink" title="1、使用交互式方案构建"></a>1、使用交互式方案构建</h2><p><img src="https://wexcdn.com/img/20210507150250.png" alt="image-20210507144819477"></p>
+<p>可行，但很不舒服，为啥非交互式不行？</p>
+<h2 id="2、偶然发现在mac上能够构建成功。"><a href="#2、偶然发现在mac上能够构建成功。" class="headerlink" title="2、偶然发现在mac上能够构建成功。"></a>2、偶然发现在mac上能够构建成功。</h2><p>难道是Windows和Maven命令行有冲突？搜索相关资料，无果。</p>
+<p>思考：既然官方示例这么写，应该有不少人实际用过，为什么没人有这个问题？系统既然没问题，那我的目光就转到了终端上，莫非。。。</p>
+<h2 id="3、使用CMD执行"><a href="#3、使用CMD执行" class="headerlink" title="3、使用CMD执行"></a>3、使用CMD执行</h2><p><img src="https://wexcdn.com/img/20210507150242.png" alt="image-20210507145119854"></p>
+<p>CMD执行没什么问题。这就解释了为什么资料少：因为大多数人还是用CMD而不是PowerShell。问题定位到PowerShell上。</p>
+<h2 id="4、PowerShell问题"><a href="#4、PowerShell问题" class="headerlink" title="4、PowerShell问题"></a>4、PowerShell问题</h2><p>查找相关资料，发现正确解法：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate `</span><br><span class="line"><span class="string">&#x27;-DgroupId=com.mycompany.app&#x27;</span> `</span><br><span class="line"><span class="string">&#x27;-DartifactId=my-app&#x27;</span> `</span><br><span class="line"><span class="string">&#x27;-DarchetypeArtifactId=maven-archetype-quickstart&#x27;</span> `</span><br><span class="line"><span class="string">&#x27;-DarchetypeVersion=1.4&#x27;</span> `</span><br><span class="line"><span class="string">&#x27;-DinteractiveMode=false&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://wexcdn.com/img/20210507150225.png" alt="image-20210507145818664"></p>
+<p>成功。</p>
+<p>在PowerShell里使用<code>-D</code>参数要用单引号<code>&#39;</code>括起来，具体原因不知，应该是和PowerShell语法有关。</p>
+<h1 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h1><p>1、使用<code>-D</code>参数要用单引号<code>&#39;</code>括起来</p>
+<p>2、使用CMD。不想开新窗口的话，就直接在PowerShell里执行CMD再退出。</p>
+<p><img src="https://wexcdn.com/img/20210507150227.png" alt="image-20210507150207633"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Windows-PowerShell-Maven/" rel="tag"># Windows PowerShell Maven</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/784431303/" rel="prev" title="学以致用——Java批量更改文件字符编码">
+                  <i class="fa fa-chevron-left"></i> 学以致用——Java批量更改文件字符编码
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/1125112739/" rel="next" title="Java版本问题">
+                  Java版本问题 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

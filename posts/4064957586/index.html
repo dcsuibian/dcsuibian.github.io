@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"style":"mac","show_result":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Eureka与host.docker.internal冲突问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eureka与host.docker.internal">
+<meta property="og:url" content="http://example.com/posts/4064957586/index.html">
+<meta property="og:site_name" content="dcsuibian的blog">
+<meta property="og:description" content="Eureka与host.docker.internal冲突问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223340.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223343.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223346.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223349.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223351.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223353.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223458.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223356.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223358.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223405.png">
+<meta property="og:image" content="https://wexcdn.com/img/20210523223408.png">
+<meta property="article:published_time" content="2021-05-23T13:38:19.000Z">
+<meta property="article:modified_time" content="2024-10-24T18:07:32.944Z">
+<meta property="article:author" content="dcsuibian">
+<meta property="article:tag" content="Docker Eureka Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wexcdn.com/img/20210523223340.png">
+
+
+<link rel="canonical" href="http://example.com/posts/4064957586/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/posts/4064957586/","path":"posts/4064957586/","title":"Eureka与host.docker.internal"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Eureka与host.docker.internal | dcsuibian的blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">dcsuibian的blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%8F%E8%BF%B0"><span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%EF%BC%9A"><span class="nav-text">环境：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%83%85%E5%86%B5"><span class="nav-text">具体情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%91%A0-%E5%88%A0%E9%99%A4C-Windows-System32-Drivers-etc-hosts%E7%9A%84%E9%83%A8%E5%88%86%E6%9D%A1%E7%9B%AE%E3%80%82"><span class="nav-text">① 删除C:\Windows\System32\Drivers\etc\hosts的部分条目。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%91%A1-%E8%AE%BE%E7%BD%AEeureka-instance-prefer-ip-address%E4%B8%BAtrue"><span class="nav-text">② 设置eureka.instance.prefer-ip-address为true</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E2%91%A2-%E8%AE%BE%E7%BD%AEeureka-instance-hostname"><span class="nav-text">③ 设置eureka.instance.hostname</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%86%E8%8A%82%E5%89%96%E6%9E%90"><span class="nav-text">细节剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E5%85%B7%E4%BD%93%E4%B8%80%E7%82%B9"><span class="nav-text">再具体一点</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">dcsuibian</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/posts/4064957586/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="dcsuibian">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dcsuibian的blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Eureka与host.docker.internal | dcsuibian的blog">
+      <meta itemprop="description" content="Eureka与host.docker.internal冲突问题">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Eureka与host.docker.internal
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-23 21:38:19" itemprop="dateCreated datePublished" datetime="2021-05-23T21:38:19+08:00">2021-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-10-25 02:07:32" itemprop="dateModified" datetime="2024-10-25T02:07:32+08:00">2024-10-25</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+            <div class="post-description">Eureka与host.docker.internal冲突问题</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><h2 id="环境："><a href="#环境：" class="headerlink" title="环境："></a>环境：</h2><ol>
+<li>OS : Windows 10</li>
+<li>Java : 11</li>
+<li>Spring : 2.3.11 RELEASE</li>
+<li>Spring Cloud : Hoxton.SR11</li>
+</ol>
+<p>注意：我的主机的ip是<strong>10.65.7.32</strong>（局域网的，要是公网的也不可能放出来）</p>
+<h2 id="具体情况"><a href="#具体情况" class="headerlink" title="具体情况"></a>具体情况</h2><p>将Eureka和服务提供方部署在同一台主机上时，Eureka显示的服务提供方为<code>host.docker.internal</code>：</p>
+<p><img src="https://wexcdn.com/img/20210523223340.png" alt="image-20210523214836537"></p>
+<p>同时，网址打不开：</p>
+<p><img src="https://wexcdn.com/img/20210523223343.png" alt="image-20210523214915436"></p>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><p>解决方案网上基本都能搜到：</p>
+<h2 id="①-删除C-Windows-System32-Drivers-etc-hosts的部分条目。"><a href="#①-删除C-Windows-System32-Drivers-etc-hosts的部分条目。" class="headerlink" title="① 删除C:\Windows\System32\Drivers\etc\hosts的部分条目。"></a>① 删除<code>C:\Windows\System32\Drivers\etc\hosts</code>的部分条目。</h2><p>来自<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/57319678/spring-boot-cloud-eurka-windows-10-eurkea-returns-host-docker-internal-for-clien">StackOverFlow</a></p>
+<p><img src="https://wexcdn.com/img/20210523223346.png" alt="image-20210523215248826"></p>
+<h2 id="②-设置eureka-instance-prefer-ip-address为true"><a href="#②-设置eureka-instance-prefer-ip-address为true" class="headerlink" title="② 设置eureka.instance.prefer-ip-address为true"></a>② 设置<code>eureka.instance.prefer-ip-address</code>为<code>true</code></h2><h2 id="③-设置eureka-instance-hostname"><a href="#③-设置eureka-instance-hostname" class="headerlink" title="③ 设置eureka.instance.hostname"></a>③ 设置<code>eureka.instance.hostname</code></h2><h1 id="细节剖析"><a href="#细节剖析" class="headerlink" title="细节剖析"></a>细节剖析</h1><p>要是直接给解决方案，那倒没什么好写了，接下来来分析一下出现这个问题的原因。</p>
+<br/>
+
+<p>首先，我们知道，<code>host.docker.internal</code>是为了在docker虚拟机中提供宿主机ip的。</p>
+<p>因为是虚拟机，所以<code>localhost</code>和<code>127.0.0.1</code>都会被认为是虚拟机的地址，但是我们发现，docker里的虚拟机是可以正常访问互联网的，所以就有了一个办法，把宿主机当做一个路由器，用跨网段访问的方式。</p>
+<p><img src="https://wexcdn.com/img/20210523223349.png" alt="image-20210523220214497"></p>
+<p>实际上Docker为我们做的事就是更改本机的hosts文件，让<code>host.docker.internal</code>解析成宿主机的网卡的地址。</p>
+<p><img src="https://wexcdn.com/img/20210523223351.png" alt="image-20210523220352973"></p>
+<p>实际上，ping是可以ping通的。但是我们会发现，在浏览器上就不行了。</p>
+<p><img src="https://wexcdn.com/img/20210523223353.png" alt="image-20210523221003172"></p>
+<p><img src="https://wexcdn.com/img/20210523223458.png" alt="image-20210523221018621"></p>
+<p>但我们可以看到，直接输入ip地址是可以的。</p>
+<p>关于这个问题，我没有特别去查相关的资料，不过既然这样，我认为<code>host.docker.internal</code>这个应该是解析不成正常的域名的，所以还是要换成ip.</p>
+<p>可是，为什么我发送给Eureka会把服务的地址设为<code>host.docker.internal</code>呢？</p>
+<p>让我们直接看看IDE的提示：</p>
+<p><img src="https://wexcdn.com/img/20210523223356.png" alt="image-20210523221556109"></p>
+<p>原来，当我们不填写hostname的时候，hostname就会从操作系统推导，所以被推成了<code>host.docker.internal</code>。</p>
+<p>那么，就有两种方式解决这个问题了：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">eureka:</span></span><br><span class="line">  <span class="attr">instance:</span></span><br><span class="line">    <span class="attr">hostname:</span> <span class="number">10.65</span><span class="number">.7</span><span class="number">.32</span> <span class="comment"># ①</span></span><br><span class="line">    <span class="comment"># prefer-ip-address: true # ②</span></span><br></pre></td></tr></table></figure>
+
+<p>不过，具有迷惑性的是，无论你采用哪一种方式，在Dashboard上都仍然会有<code>host.docker.internal</code>。但实际上，它们的链接已经变成了真正的地址，可以正常使用了。</p>
+<p><img src="https://wexcdn.com/img/20210523223358.png" alt="image-20210523222651132"></p>
+<h2 id="再具体一点"><a href="#再具体一点" class="headerlink" title="再具体一点"></a>再具体一点</h2><p>再具体一点，看看Eureka的客户端到底发了啥。</p>
+<p><img src="https://wexcdn.com/img/20210523223405.png" alt="image-20210523223015802"></p>
+<p><img src="https://wexcdn.com/img/20210523223408.png" alt="image-20210523223029002"></p>
+<p>现在可以看到了，原来<code> host.docker.internal:ingredient-service:0</code>是这个实例的id，而hostname就是我们刚刚改的部分。</p>
+<p>如果你采用了改hostname的方式，那么这里的hostname就会变成你改成的值。</p>
+<p>而如果你采用了改<code>eureka.instance.prefer-ip-address</code>，那么其实hostname的值会变成你的ip地址，也就是这里的10.65.7.32。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Docker-Eureka-Java/" rel="tag"># Docker Eureka Java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/1125112739/" rel="prev" title="Java版本问题">
+                  <i class="fa fa-chevron-left"></i> Java版本问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/3331132210/" rel="next" title="[Python] json.dumps的参数:ensure_ascii">
+                  [Python] json.dumps的参数:ensure_ascii <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">dcsuibian</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
